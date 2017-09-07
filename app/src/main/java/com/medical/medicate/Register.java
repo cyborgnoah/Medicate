@@ -1,37 +1,10 @@
 package com.medical.medicate;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Iterator;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class Register extends AppCompatActivity
 {
@@ -39,7 +12,6 @@ public class Register extends AppCompatActivity
     public void onCreate(Bundle savedinstancestate)
     {
         super.onCreate(savedinstancestate);
-        Intent regsister=getIntent();
         setContentView(R.layout.registeration_form);
     }
     public void submit_register(View view)
@@ -54,10 +26,10 @@ public class Register extends AppCompatActivity
         String reg_Email_value = reg_Email.getText().toString();
         String reg_Password_value = reg_Password.getText().toString();
         String reg_ConfirmPassword_value = reg_ConfirmPassword.getText().toString();
-        /*Log.d("Full Name",reg_FullName_value);
+        Log.d("Full Name",reg_FullName_value);
         Log.d("Username",reg_Username_value);
         Log.d("Email",reg_Email_value);
         Log.d("Password",reg_Password_value);
-        Log.d("Confirm Passowrd",reg_ConfirmPassword_value);*/
+        Log.d("Confirm Passowrd",reg_ConfirmPassword_value);
     }
 }

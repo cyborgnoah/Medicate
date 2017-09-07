@@ -12,7 +12,6 @@ public class Login extends AppCompatActivity
     {
         super.onCreate(savedinstantstate);
         setContentView(R.layout.login);
-        Intent login=getIntent();
     }
 
     public void register(View view)
