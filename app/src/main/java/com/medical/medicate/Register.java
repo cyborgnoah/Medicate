@@ -6,6 +6,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
 public class Register extends AppCompatActivity
 {
     @Override
@@ -31,5 +41,31 @@ public class Register extends AppCompatActivity
         Log.d("Email",reg_Email_value);
         Log.d("Password",reg_Password_value);
         Log.d("Confirm Passowrd",reg_ConfirmPassword_value);
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="localhost/Server/create_user.php";
+
+        // Request a JSON response from the provided URL.
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.POST, url, null, new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        // Display the response in Android Manager
+                        Log.d("Response is: ",
+                                response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.d("Error : ","Some error occured!");
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(jsObjRequest);
     }
 }
