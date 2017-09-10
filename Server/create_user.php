@@ -16,18 +16,14 @@ if (isset($_POST['reg_FullName']) && isset($_POST['reg_Username']) && isset($_PO
     $reg_Username = $_POST['reg_Username'];
     $reg_Email = $_POST['reg_Email'];
     $reg_Password = $_POST['reg_Password'];
+    define('DB_USER',"root");
+    define('DB_PASSWORD',"");
+    define('DB_DATABASE',"medicate");
+    define('DB_SERVER',"localhost");
+    $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error());
 
-    // include db connect class
-    require_once __DIR__ . '/Include/db_connect.php';
-
-    // connecting to db
-    $db = new DB_CONNECT();
-
-    // mysql inserting a new row
-    $result = mysql_query("INSERT INTO users(reg_FullName, reg_Username, reg_Email, reg_Password) VALUES('$reg_FullName', '$reg_Username', '$reg_Email','$reg_Password')");
-
-    // check if row inserted or not
-    if ($result)
+    if (mysqli_query($con,"INSERT INTO users(reg_FullName, reg_Username, reg_Email, reg_Password)
+    VALUES('$reg_FullName', '$reg_Username', '$reg_Email','$reg_Password')"))
     {
         // successfully inserted into database
         $response["success"] = 1;
@@ -40,7 +36,7 @@ if (isset($_POST['reg_FullName']) && isset($_POST['reg_Username']) && isset($_PO
     {
         // failed to insert row
         $response["success"] = 0;
-        $response["message"] = "Oops! An error occurred.";
+        $response["message"] = mysqli_error($con);
 
         // echoing JSON response
         echo json_encode($response);
