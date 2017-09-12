@@ -23,5 +23,18 @@ class DB_Functions {
             return false;
         }
     }
+
+  public function getUserByUserAndPassword($user, $password) {
+        $sql = "SELECT * FROM user WHERE User = '$user' and Password = '$password'";
+        $result = mysqli_query($this->db->con,$sql) or die(mysqli_connect_errno());
+        $no_of_rows = mysqli_num_rows($result);
+        if ($no_of_rows > 0) {
+            $result = mysqli_fetch_array($result);
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
 }
 ?>
