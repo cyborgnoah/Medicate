@@ -8,7 +8,7 @@ $tag = $_POST['tag'];
     $db = new DB_Functions();
     $response = array("tag" => $tag, "error" => FALSE);
 
-    //add sub member code
+    //registration
     if ($tag == 'register') {
         $name = $_POST['FullName'];
         $username = $_POST['Username'];
@@ -28,6 +28,22 @@ $tag = $_POST['tag'];
            echo json_encode($response);
         }
     }
-
+    //login
+    else if ($tag == 'login') {
+        $user = $_POST['user'];
+        $password = $_POST['password'];
+        $user = $db->getUserByUserAndPassword($user , $password);
+        if ($user != false) {
+                        
+            $response["error"] = FALSE;
+            $response["Id"] = $user["Id"];
+            $response["User"] = $user["User"];
+            echo json_encode($response);
+        } else {
+            $response["error"] = TRUE;
+            $response["error_msg"] = "Incorrect token or password!";
+            echo json_encode($response);
+        }
+    }
 }
 ?>
