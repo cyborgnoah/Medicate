@@ -93,7 +93,6 @@
             android:layout_height="60sp"
             android:layout_marginTop="43dp"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="submit_register"
             android:text="Create Account"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
