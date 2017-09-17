@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
@@ -123,19 +122,17 @@ public class Register extends AppCompatActivity {
         String tag_string_req = "register";
         pDialog.setMessage("Registering ...");
         showDialog();
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.POST, AppURLs.URL, null, new Response.Listener<JSONObject>() {
+        StringRequest StringRequest = new StringRequest(Request.Method.POST, AppURLs.URL,
+                new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response)
+            public void onResponse(String response)
             {
                 hideDialog();
                 try {
-                    Log.d("Error : ","Before Json");
-                    Log.d("Error : ","Hello : "+response);
-                    JSONObject jObj = new JSONObject((Map) response);
-                    Log.d("Error : ","After Json");
+                    Log.d("Erro : ","Before Json"+response+"abc");
+                    JSONObject jObj = new JSONObject(response);
+                    Log.d("Erro : ","After Json");
                     boolean error = jObj.getBoolean("error");
-                    Log.d("Error : ","After Boolean.");
                     if (!error)
                     {
                         Toast.makeText(getApplicationContext(), "Regestered successfully", Toast.LENGTH_LONG).show();
@@ -153,14 +150,11 @@ public class Register extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }, new Response.ErrorListener()
-                {
+        }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error)
-            {
+            public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(),
                        "Some problem occur: check NetworK" , Toast.LENGTH_LONG).show();
-                Log.d("Error:",error.toString());
                 hideDialog();
             }
         }) {
@@ -178,7 +172,7 @@ public class Register extends AppCompatActivity {
 
         };
 
-        AppController.getInstance().addToRequestQueue(jsObjRequest, tag_string_req);
+        AppController.getInstance().addToRequestQueue(StringRequest, tag_string_req);
     }
 
     private void showDialog() {
