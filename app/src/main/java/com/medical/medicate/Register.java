@@ -10,13 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,20 +56,16 @@ public class Register extends AppCompatActivity {
                 reg_ConfirmPassword_value = reg_ConfirmPassword.toString();
                 boolean isValidRegistration = validateUser();
 
-                if (isValidRegistration) {
+                if (isValidRegistration)
+                {
                     registerUser(reg_FullName_value, reg_Username_value, reg_Email_value, reg_Password_value);
                 }
-
-
             }
         });
-
     }
 
-
-
-    public boolean validateUser() {
-
+    public boolean validateUser()
+    {
         boolean isValid = true;
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         String Userpattern ="[a-zA-Z0-9]+";
@@ -123,36 +116,39 @@ public class Register extends AppCompatActivity {
     }
 
 
-    private void registerUser(final String reg_FullName_value ,final String  reg_Username_value, final String reg_Email_value, final String  reg_Password_value) {
+    private void registerUser(final String reg_FullName_value ,final String  reg_Username_value, final String reg_Email_value, final String  reg_Password_value)
+    {
         // Tag used to cancel the request
-        String tag_string_req = "req_register";
-        System.out.println("enter  in fun");
+        String tag_string_req = "register";
         pDialog.setMessage("Registering ...");
         showDialog();
         StringRequest StringRequest = new StringRequest(Request.Method.POST, AppURLs.URL,
                 new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
-                System.out.println("enter  in check");
+            public void onResponse(String response)
+            {
                 hideDialog();
                 try {
+                    Log.d("Error : ","Before Json");
+                    Log.d("Error : ","Hello : "+response);
                     JSONObject jObj = new JSONObject(response);
-                    Log.d("Response Registration", "" + response);
+                    Log.d("Error : ","After Json");
                     boolean error = jObj.getBoolean("error");
-                    System.out.println("enter  in try");
-                    if (!error) {                 Toast.makeText(getApplicationContext(), "Regestered successfully", Toast.LENGTH_LONG).show();
-                     Intent intent = new Intent(Register.this, Login.class);
-                    startActivity(intent);
-                    finish();
-                    setContentView(R.layout.login);
-                    System.out.println("enter  in no error");
-                    } else {
-                     Toast.makeText(getApplicationContext(), "Not Regestered", Toast.LENGTH_LONG).show();
-                System.out.println("enter  in error");
+                    Log.d("Error : ","After Boolean.");
+                    if (!error)
+                    {
+                        Toast.makeText(getApplicationContext(), "Regestered successfully", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Register.this, Login.class);
+                        startActivity(intent);
+                        finish();
+                        setContentView(R.layout.login);
                     }
-               }
-
-                catch (JSONException e) {
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Not Regestered.", Toast.LENGTH_LONG).show();
+                    }
+               }catch (JSONException e)
+                {
                     e.printStackTrace();
                 }
             }
