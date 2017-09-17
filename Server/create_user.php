@@ -22,7 +22,7 @@ if (isset($_POST['reg_FullName']) && isset($_POST['reg_Username']) && isset($_PO
     define('DB_SERVER',"localhost");
     $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error());
 
-    if (mysqli_query($con,"INSERT INTO users(reg_FullName, reg_Username, reg_Email, reg_Password)
+    if (mysqli_query($con,"INSERT INTO userinfo(reg_FullName, reg_Username, reg_Email, reg_Password)
     VALUES('$reg_FullName', '$reg_Username', '$reg_Email','$reg_Password')"))
     {
         // successfully inserted into database
