@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL ^ E_DEPRECATED);
-if(isset($_POST['tag']) && $_POST['tag'] != '') {
+if(isset($_POST['tag']) && $_POST['tag'] != '')
+{
 $tag = $_POST['tag'];
 
 
@@ -47,5 +48,11 @@ $tag = $_POST['tag'];
             return json_encode($response);
         }
     }
+}
+else
+{
+	$response["error"] = TRUE;
+	$response["error_msg"] = "Recieved No Data";
+	return json_encode($response);
 }
 ?>
