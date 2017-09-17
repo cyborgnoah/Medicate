@@ -48,6 +48,13 @@ $tag = $_POST['tag'];
             return json_encode($response);
         }
     }
+		else
+		{
+			{
+				$response["error"] = TRUE;
+				$response["error_msg"] = "Incorrect token or password!";
+				return json_encode($response);
+			}
 }
 else
 {
