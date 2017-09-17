@@ -17,7 +17,7 @@ if (isset($_POST['reg_FullName']) && isset($_POST['reg_Username']) && isset($_PO
     $reg_Email = $_POST['reg_Email'];
     $reg_Password = $_POST['reg_Password'];
     define('DB_USER',"root");
-    define('DB_PASSWORD',"");
+    define('DB_PASSWORD',"Cyborg@champ45");
     define('DB_DATABASE',"medicate");
     define('DB_SERVER',"localhost");
     $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error());
