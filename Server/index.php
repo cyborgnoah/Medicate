@@ -22,13 +22,13 @@ $tag = $_POST['tag'];
 				{
             $response["error"] = FALSE;
             $response["error_msg"] = "Registration Successful";
-            return json_encode($response);
+            echo json_encode($response);
         }
         else
 				{
            $response["error"] = TRUE;
            $response["error_msg"] = "Registration Failed";
-           return json_encode($response);
+           echo json_encode($response);
         }
     }
     //login
@@ -41,11 +41,11 @@ $tag = $_POST['tag'];
             $response["error"] = FALSE;
             $response["Id"] = $user["Id"];
             $response["User"] = $user["User"];
-            return json_encode($response);
+            echo json_encode($response);
         } else {
             $response["error"] = TRUE;
             $response["error_msg"] = "Incorrect token or password!";
-            return json_encode($response);
+            echo json_encode($response);
         }
     }
 		else
@@ -53,13 +53,13 @@ $tag = $_POST['tag'];
 			{
 				$response["error"] = TRUE;
 				$response["error_msg"] = "Incorrect token or password!";
-				return json_encode($response);
+				echo json_encode($response);
 			}
 }
 else
 {
 	$response["error"] = TRUE;
 	$response["error_msg"] = "Recieved No Data";
-	return json_encode($response);
+	echo json_encode($response);
 }
 ?>
