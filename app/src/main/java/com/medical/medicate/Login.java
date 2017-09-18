@@ -24,31 +24,23 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-//import android.support.design.widget.Snackbar;
-
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity
+{
     private Button LoginButton ;
     private EditText login_Username, login_Password ;
-
     private ProgressDialog progressDialog;
-    SharedPreferences shpref;
-    SharedPreferences.Editor edit;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        shpref = getSharedPreferences("sh", MODE_PRIVATE);
-        edit = shpref.edit();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         LoginButton = (Button) findViewById(R.id.LoginButton );
         login_Username= (EditText) findViewById(R.id.login_Username);
         login_Password = (EditText) findViewById(R.id.login_Password );
-
-
-
 
         LoginButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -66,33 +58,30 @@ public class Login extends AppCompatActivity {
     }
 
     private void checkLogin(final String login_Username_value , final String login_Password_value ) {
-        String tag_string_req = "req_login";
+        String tag_string_req = "login";
         progressDialog.setMessage("Logging in ...");
         showDialog();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppURLs.URL, new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(String response)
+            {
                 hideDialog();
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    Log.i("response login", ""+response);
-                    if(jObj.getString("error").equalsIgnoreCase("true"))
+                try
+                {
+                    JSONObject jObj = new JSONObject(response.toString());
+                    boolean error = jObj.getBoolean("error");
+                    if(!error)
                     {
-                        Toast.makeText(getApplication(), ""+jObj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(), "Successfully Login", Toast.LENGTH_LONG).show();
                     }
                     else
                     {
-                        edit.putString("token", "login");
-                        edit.putString("id", ""+jObj.getString("Id"));
-                        edit.putString("user", ""+jObj.getString("User"));
-                        edit.commit();
-                        Intent intent = new Intent(Login.this,
-                                Register.class);
-                        startActivity(intent);
-                        finish();
+                        Toast.makeText(getApplication(), "Username/Password Incorrect", Toast.LENGTH_LONG).show();
                     }
-                } catch (JSONException e) {
+                }
+                catch (JSONException e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -106,8 +95,8 @@ public class Login extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("tag", "login");
-                params.put("user", login_Username_value );
-                params.put("password", login_Password_value );
+                params.put("Username", login_Username_value );
+                params.put("Password", login_Password_value );
                 return params;
             }
         };
