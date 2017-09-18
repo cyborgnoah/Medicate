@@ -1,18 +1,18 @@
 <?php
 error_reporting(E_ALL ^ E_DEPRECATED);
-if(isset($_POST['tag']) && $_POST['tag'] != '')
+if(isset($_GET['tag']) && $_GET['tag'] != '')
 {
-  $tag = $_POST['tag'];
+  $tag = $_GET['tag'];
   require_once 'DB_Functions.php';
   $db = new DB_Functions();
   $response = array("tag" => $tag, "error" => FALSE);
   //registration
   if ($tag == 'register')
   {
-    $name = $_POST['FullName'];
-    $username = $_POST['Username'];
-    $email = $_POST['Email'];
-    $password = $_POST['Password'];
+    $name = $_GET['FullName'];
+    $username = $_GET['Username'];
+    $email = $_GET['Email'];
+    $password = $_GET['Password'];
     $user = $db->storeUser($name, $username , $email , $password);
     if ($user)
     {
@@ -30,8 +30,8 @@ if(isset($_POST['tag']) && $_POST['tag'] != '')
   //login
   else if ($tag == 'login')
   {
-    $user = $_POST['Username'];
-    $password = $_POST['Password'];
+    $user = $_GET['Username'];
+    $password = $_GET['Password'];
     $user_check = $db->getUserByUserAndPassword($user , $password);
     if ($user_check != false)
     {
