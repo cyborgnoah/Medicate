@@ -50,11 +50,9 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
   }
   else
   {
-    {
       $response["error"] = TRUE;
       $response["error_msg"] = "Incorrect token or password!";
-      echo json_encode($response);
-    }
+      echo json_encode($response);    
   }
 }
 else
