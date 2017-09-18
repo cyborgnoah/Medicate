@@ -9,35 +9,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class Register extends AppCompatActivity {
+public class Register extends AppCompatActivity
+{
     private EditText reg_FullName, reg_Username, reg_Email, reg_Password, reg_ConfirmPassword;
     private String reg_FullName_value, reg_Username_value, reg_Email_value, reg_Password_value, reg_ConfirmPassword_value;
     private Button reg_Register;
     private ProgressDialog pDialog;
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registeration_form);
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
-
-
-
-
         reg_Register= (Button) findViewById(R.id.reg_Register);
         reg_FullName= (EditText) findViewById(R.id.reg_FullName);
         reg_Username=(EditText)findViewById(R.id.reg_Username);
@@ -45,17 +38,17 @@ public class Register extends AppCompatActivity {
         reg_Password= (EditText) findViewById(R.id.login_Password);
         reg_ConfirmPassword= (EditText) findViewById(R.id.reg_ConfirmPassword);
 
-
-
-        reg_Register.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+        reg_Register.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
                 reg_FullName_value = reg_FullName.getText().toString();
                 reg_Username_value = reg_Username.getText().toString();
                 reg_Email_value = reg_Email.getText().toString();
                 reg_Password_value = reg_Password.getText().toString();
                 reg_ConfirmPassword_value = reg_ConfirmPassword.toString();
                 boolean isValidRegistration = validateUser();
-
                 if (isValidRegistration)
                 {
                     registerUser(reg_FullName_value, reg_Username_value, reg_Email_value, reg_Password_value);
@@ -122,17 +115,14 @@ public class Register extends AppCompatActivity {
         String tag_string_req = "register";
         pDialog.setMessage("Registering ...");
         showDialog();
-        StringRequest StringRequest = new StringRequest(Request.Method.POST, AppURLs.URL,
-                new Response.Listener<String>() {
+        StringRequest sr = new StringRequest(Request.Method.POST, AppURLs.URL , new Response.Listener<String>(){
             @Override
             public void onResponse(String response)
             {
                 hideDialog();
                 try {
-                    Log.d("Erro : ","Before Json"+response+"abc");
-                    JSONObject jObj = new JSONObject(response);
-                    Log.d("Erro : ","After Json");
-                    boolean error = jObj.getBoolean("error");
+                    JSONObject jObj = new JSONObject(response.toString());
+                        boolean error = jObj.getBoolean("error");
                     if (!error)
                     {
                         Toast.makeText(getApplicationContext(), "Regestered successfully", Toast.LENGTH_LONG).show();
@@ -159,8 +149,8 @@ public class Register extends AppCompatActivity {
             }
         }) {
             @Override
-            protected Map<String, String> getParams() {
-                // Posting params to register url
+            protected Map<String, String> getParams()
+            {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("tag", "register");
                 params.put("FullName", reg_FullName_value );
@@ -172,7 +162,7 @@ public class Register extends AppCompatActivity {
 
         };
 
-        AppController.getInstance().addToRequestQueue(StringRequest, tag_string_req);
+        AppController.getInstance().addToRequestQueue(sr, tag_string_req);
     }
 
     private void showDialog() {
