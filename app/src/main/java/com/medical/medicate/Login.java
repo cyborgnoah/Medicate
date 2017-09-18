@@ -61,8 +61,7 @@ public class Login extends AppCompatActivity
         String tag_string_req = "login";
         progressDialog.setMessage("Logging in ...");
         showDialog();
-        StringRequest strReq = new StringRequest(Request.Method.GET,
-                AppURLs.URL, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET, AppURLs.URL+"?tag=login&Username="+login_Username_value+"&Password="+login_Password_value , new Response.Listener<String>(){
             @Override
             public void onResponse(String response)
             {
@@ -90,16 +89,7 @@ public class Login extends AppCompatActivity
             public void onErrorResponse(VolleyError error) {
                 hideDialog();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("tag", "login");
-                params.put("Username", login_Username_value );
-                params.put("Password", login_Password_value );
-                return params;
-            }
-        };
+        });
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 

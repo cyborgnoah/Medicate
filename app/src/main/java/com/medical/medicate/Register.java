@@ -116,14 +116,10 @@ public class Register extends AppCompatActivity
         String tag_string_req = "register";
         pDialog.setMessage("Registering ...");
         showDialog();
-        StringRequest sr = new StringRequest(Request.Method.GET, AppURLs.URL , new Response.Listener<String>(){
+        StringRequest sr = new StringRequest(Request.Method.GET, AppURLs.URL+"?tag=register&FullName="+reg_FullName_value+"&Username="+reg_Username_value+"&Email="+reg_Email_value+"&Password="+reg_Password_value , new Response.Listener<String>(){
             @Override
             public void onResponse(String response)
             {
-                if(TextUtils.isEmpty(response)){
-                    Toast.makeText(getApplicationContext(), "Response Empty", Toast.LENGTH_LONG).show();
-                    return;
-                }
                 hideDialog();
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -138,7 +134,7 @@ public class Register extends AppCompatActivity
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(), "Not Regestered.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), jObj.getString("error_msg"), Toast.LENGTH_LONG).show();
                     }
                }catch (JSONException e)
                 {
@@ -152,20 +148,7 @@ public class Register extends AppCompatActivity
                        "Some problem occur: check NetworK" , Toast.LENGTH_LONG).show();
                 hideDialog();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("tag", "register");
-                params.put("FullName", reg_FullName_value );
-                params.put("Username", reg_Username_value);
-                params.put("Email", reg_Email_value);
-                params.put("Password", reg_Password_value);
-                return params;
-            }
-
-        };
+        });
         AppController.getInstance().addToRequestQueue(sr, tag_string_req);
     }
 
