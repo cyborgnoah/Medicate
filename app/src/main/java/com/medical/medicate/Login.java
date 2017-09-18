@@ -61,7 +61,7 @@ public class Login extends AppCompatActivity
         String tag_string_req = "login";
         progressDialog.setMessage("Logging in ...");
         showDialog();
-        StringRequest strReq = new StringRequest(Request.Method.POST,
+        StringRequest strReq = new StringRequest(Request.Method.GET,
                 AppURLs.URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response)
