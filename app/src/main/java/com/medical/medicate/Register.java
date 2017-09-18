@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -119,10 +120,14 @@ public class Register extends AppCompatActivity
             @Override
             public void onResponse(String response)
             {
+                if(TextUtils.isEmpty(response)){
+                    Toast.makeText(getApplicationContext(), "Response Empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 hideDialog();
                 try {
-                    JSONObject jObj = new JSONObject(response.toString());
-                        boolean error = jObj.getBoolean("error");
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
                     if (!error)
                     {
                         Toast.makeText(getApplicationContext(), "Regestered successfully", Toast.LENGTH_LONG).show();
@@ -161,16 +166,17 @@ public class Register extends AppCompatActivity
             }
 
         };
-
         AppController.getInstance().addToRequestQueue(sr, tag_string_req);
     }
 
-    private void showDialog() {
+    private void showDialog()
+    {
         if (!pDialog.isShowing())
             pDialog.show();
     }
 
-    private void hideDialog() {
+    private void hideDialog()
+    {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
