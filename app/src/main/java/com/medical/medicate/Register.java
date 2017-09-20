@@ -1,7 +1,9 @@
 package com.medical.medicate;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -50,26 +52,19 @@ public class Register extends AppCompatActivity
                 reg_Password_value = reg_Password.getText().toString();
                 reg_ConfirmPassword_value = reg_ConfirmPassword.getText().toString();
                 boolean isValidRegistration = validateUser();
-                if(isInternetAvailable())
-                {
-                    Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
-                }
                 if (isValidRegistration)
                 {
-                    registerUser(reg_FullName_value, reg_Username_value, reg_Email_value, reg_Password_value);
+                        registerUser(reg_FullName_value, reg_Username_value, reg_Email_value, reg_Password_value);
                 }
             }
         });
     }
-    public boolean isInternetAvailable() {
-        try {
-            final InetAddress address = InetAddress.getByName("www.google.com");
-            return !address.equals("");
-        } catch (UnknownHostException e) {
-            // Log error
-        }
-        return false;
+    public boolean isNetworkAvailable()
+    {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
+
 
     public boolean validateUser()
     {
@@ -182,7 +177,7 @@ public class Register extends AppCompatActivity
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(),
-                       "Some problem occur: check NetworK" , Toast.LENGTH_LONG).show();
+                       "Network Error" , Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         });
