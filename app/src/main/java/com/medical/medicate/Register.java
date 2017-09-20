@@ -15,6 +15,9 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class Register extends AppCompatActivity
 {
     private EditText reg_FullName, reg_Username, reg_Email, reg_Password, reg_ConfirmPassword;
@@ -47,12 +50,25 @@ public class Register extends AppCompatActivity
                 reg_Password_value = reg_Password.getText().toString();
                 reg_ConfirmPassword_value = reg_ConfirmPassword.getText().toString();
                 boolean isValidRegistration = validateUser();
+                if(isInternetAvailable())
+                {
+                    Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                }
                 if (isValidRegistration)
                 {
                     registerUser(reg_FullName_value, reg_Username_value, reg_Email_value, reg_Password_value);
                 }
             }
         });
+    }
+    public boolean isInternetAvailable() {
+        try {
+            final InetAddress address = InetAddress.getByName("www.google.com");
+            return !address.equals("");
+        } catch (UnknownHostException e) {
+            // Log error
+        }
+        return false;
     }
 
     public boolean validateUser()
