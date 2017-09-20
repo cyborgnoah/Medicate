@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -49,11 +50,19 @@ public class Login extends AppCompatActivity
             {
                 login_Username_value = login_Username.getText().toString();
                 login_Password_value = login_Password.getText().toString();
-                boolean isValidRegistration = validateUser();
-                if (isValidRegistration)
+                if(isNetworkConnected()!=true)
                 {
-                        checkLogin(login_Username_value, login_Password_value);
+                    Toast.makeText(getApplication(), "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
+                else
+                {
+                    boolean isValidRegistration = validateUser();
+                    if (isValidRegistration)
+                    {
+                        checkLogin(login_Username_value, login_Password_value);
+                    }
+                }
+
             }
         });
         RegistrationButton.setOnClickListener(new OnClickListener() {
@@ -64,6 +73,11 @@ public class Login extends AppCompatActivity
                 Login.this.startActivity(register);
             }
         });
+    }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
     public boolean validateUser()
     {
@@ -115,6 +129,8 @@ public class Login extends AppCompatActivity
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),
+                        "Network Error" , Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         });

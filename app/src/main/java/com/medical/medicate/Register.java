@@ -51,10 +51,17 @@ public class Register extends AppCompatActivity
                 reg_Email_value = reg_Email.getText().toString();
                 reg_Password_value = reg_Password.getText().toString();
                 reg_ConfirmPassword_value = reg_ConfirmPassword.getText().toString();
-                boolean isValidRegistration = validateUser();
-                if (isValidRegistration)
+                if(isNetworkAvailable()!=true)
                 {
+                    Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    boolean isValidRegistration = validateUser();
+                    if (isValidRegistration)
+                    {
                         registerUser(reg_FullName_value, reg_Username_value, reg_Email_value, reg_Password_value);
+                    }
                 }
             }
         });
