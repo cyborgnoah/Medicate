@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,8 +14,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Register extends AppCompatActivity
 {
@@ -30,14 +26,15 @@ public class Register extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registeration_form);
+
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
-        reg_Register= (Button) findViewById(R.id.reg_Register);
-        reg_FullName= (EditText) findViewById(R.id.reg_FullName);
+        reg_Register= (Button)findViewById(R.id.reg_Register);
+        reg_FullName= (EditText)findViewById(R.id.reg_FullName);
         reg_Username=(EditText)findViewById(R.id.reg_Username);
-        reg_Email = (EditText) findViewById(R.id.reg_Email );
-        reg_Password= (EditText) findViewById(R.id.login_Password);
-        reg_ConfirmPassword= (EditText) findViewById(R.id.reg_ConfirmPassword);
+        reg_Email = (EditText)findViewById(R.id.reg_Email );
+        reg_Password= (EditText)findViewById(R.id.reg_Password);
+        reg_ConfirmPassword= (EditText)findViewById(R.id.reg_ConfrimPassword);
 
         reg_Register.setOnClickListener(new View.OnClickListener()
         {
@@ -48,7 +45,7 @@ public class Register extends AppCompatActivity
                 reg_Username_value = reg_Username.getText().toString();
                 reg_Email_value = reg_Email.getText().toString();
                 reg_Password_value = reg_Password.getText().toString();
-                reg_ConfirmPassword_value = reg_ConfirmPassword.toString();
+                reg_ConfirmPassword_value = reg_ConfirmPassword.getText().toString();
                 boolean isValidRegistration = validateUser();
                 if (isValidRegistration)
                 {
@@ -61,54 +58,76 @@ public class Register extends AppCompatActivity
     public boolean validateUser()
     {
         boolean isValid = true;
+        String fullnamePattern = "[a-zA-Z ]+";
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        String Userpattern ="[a-zA-Z0-9]+";
-        if ("".equals(reg_FullName_value)) {
-            reg_FullName.setError("Please enter Name");
-            isValid = false;
+        String userPattern ="[a-zA-Z0-9]+";
+        if ("".equals(reg_FullName_value))
+        {
+            reg_FullName.setError("Empty Field");
+            reg_FullName.requestFocus();
+            return false;
         }
-        if ("".equals( reg_Username_value)) {
-            reg_Username.setError("Please enter User Name");
-            isValid = false;
-        }
-        if ("".equals(reg_Email_value)) {
-            reg_Email.setError("Please enter Email Id");
-            isValid = false;
-        }
-
-        if (!reg_FullName_value.matches("[a-zA-Z ]+")) {
+        if (!reg_FullName_value.matches(fullnamePattern))
+        {
             reg_FullName.setError("Name should be in character form");
             reg_FullName.setText("");
-            isValid = false;
+            reg_FullName.requestFocus();
+            return false;
         }
-        if ("".equals( reg_Password_value)) {
-            reg_Password.setError("Please Enter valid Password");
-            isValid = false;
-        }
-        if((reg_Password_value.length()<10) || (reg_Password_value.length()>20))
+        if ("".equals( reg_Username_value))
         {
-            reg_Password.setError("Password length 10-20");
-            reg_Password.setText("");
-            isValid = false;
+            reg_Username.setError("Empty Field");
+            reg_Username.requestFocus();
+            return false;
         }
-        if ("".equals(reg_ConfirmPassword_value)) {
-            reg_ConfirmPassword.setError("Please Enter Password again");
-            isValid = false;
+        if (!reg_Username_value.matches(userPattern))
+        {
+            reg_Username.setError("Please enter valid username");
+            reg_Username.setText("");
+            reg_Username.requestFocus();
+            return false;
+        }
+        if ("".equals(reg_Email_value))
+        {
+            reg_Email.setError("Empty Field");
+            reg_Email.requestFocus();
+            return false;
         }
         if (!reg_Email_value.matches(emailPattern))
-        {reg_Email.setError("Please enter valid Email Id");
+        {
+            reg_Email.setError("Please enter valid Email Id");
             reg_Email.setText("");
-            isValid = false;
+            reg_Email.requestFocus();
+            return false;
         }
-        if (!reg_Username_value.matches(Userpattern))
-        {   reg_Username.setError("Please enter valid username");
-            reg_Username.setText("");
-            isValid = false;
+        if ("".equals( reg_Password_value))
+        {
+            reg_Password.setError("Empty Field");
+            reg_Password.requestFocus();
+            return false;
         }
-
-        return isValid;
+        if((reg_Password_value.length()<8) || (reg_Password_value.length()>20))
+        {
+            reg_Password.setError("Password length 8-20");
+            reg_Password.setText("");
+            reg_Password.requestFocus();
+            return false;
+        }
+        if ("".matches(reg_ConfirmPassword_value))
+        {
+            reg_ConfirmPassword.setError("Empty Field");
+            reg_ConfirmPassword.requestFocus();
+            return false;
+        }
+        if (!reg_Password_value.matches(reg_ConfirmPassword_value))
+        {
+            reg_ConfirmPassword.setError("Password Mismatch");
+            reg_ConfirmPassword.setText("");
+            reg_ConfirmPassword.requestFocus();
+            return false;
+        }
+        return true;
     }
-
 
     private void registerUser(final String reg_FullName_value ,final String  reg_Username_value, final String reg_Email_value, final String  reg_Password_value)
     {
@@ -134,7 +153,9 @@ public class Register extends AppCompatActivity
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(), jObj.getString("error_msg"), Toast.LENGTH_LONG).show();
+                        reg_Username.setError("Username Exists");
+                        reg_Username.setText("");
+                        reg_Username.requestFocus();
                     }
                }catch (JSONException e)
                 {
