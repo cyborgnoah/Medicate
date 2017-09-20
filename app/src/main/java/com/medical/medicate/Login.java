@@ -1,7 +1,9 @@
 package com.medical.medicate;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -48,13 +50,9 @@ public class Login extends AppCompatActivity
                 login_Username_value = login_Username.getText().toString();
                 login_Password_value = login_Password.getText().toString();
                 boolean isValidRegistration = validateUser();
-                if(isInternetAvailable())
-                {
-                    Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
-                }
                 if (isValidRegistration)
                 {
-                    checkLogin(login_Username_value, login_Password_value);
+                        checkLogin(login_Username_value, login_Password_value);
                 }
             }
         });
@@ -67,16 +65,6 @@ public class Login extends AppCompatActivity
             }
         });
     }
-    public boolean isInternetAvailable() {
-        try {
-            final InetAddress address = InetAddress.getByName("www.google.com");
-            return !address.equals("");
-        } catch (UnknownHostException e) {
-            // Log error
-        }
-        return false;
-    }
-
     public boolean validateUser()
     {
         boolean isValid = true;
