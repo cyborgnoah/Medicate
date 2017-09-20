@@ -114,7 +114,8 @@ public class Login extends AppCompatActivity
                     boolean error = jObj.getBoolean("error");
                     if(!error)
                     {
-                        Toast.makeText(getApplication(), "Successfully Login", Toast.LENGTH_LONG).show();
+                        Intent login = new Intent(Login.this,module_navigation.class);
+                        Login.this.startActivity(login);
                     }
                     else
                     {
