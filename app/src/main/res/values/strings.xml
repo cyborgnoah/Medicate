@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Medicate</string>
+    <string name="title_activity_module_navigation">module_navigation</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

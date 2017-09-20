@@ -1,8 +1,9 @@
 package com.medical.medicate;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -21,13 +21,14 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class Login extends AppCompatActivity
 {
-    private Button LoginButton ;
+    private Button LoginButton,RegistrationButton ;
     private EditText login_Username, login_Password ;
+    private String login_Username_value,login_Password_value;
     private ProgressDialog progressDialog;
 
     @Override
@@ -39,22 +40,63 @@ public class Login extends AppCompatActivity
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         LoginButton = (Button) findViewById(R.id.LoginButton );
+        RegistrationButton = (Button)findViewById(R.id.RegisterButton);
         login_Username= (EditText) findViewById(R.id.login_Username);
-        login_Password = (EditText) findViewById(R.id.login_Password );
+        login_Password = (EditText) findViewById(R.id.login_Password);
 
         LoginButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String  login_Username_value = login_Username.getText().toString();
-                String login_Password_value = login_Password.getText().toString();
-                checkLogin( login_Username_value , login_Password_value );
+            public void onClick(View v)
+            {
+                login_Username_value = login_Username.getText().toString();
+                login_Password_value = login_Password.getText().toString();
+                if(isNetworkConnected()!=true)
+                {
+                    Toast.makeText(getApplication(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    boolean isValidRegistration = validateUser();
+                    if (isValidRegistration)
+                    {
+                        checkLogin(login_Username_value, login_Password_value);
+                    }
+                }
+
+            }
+        });
+        RegistrationButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent register = new Intent(Login.this,Register.class);
+                Login.this.startActivity(register);
             }
         });
     }
-    public void register(View view)
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
+    public boolean validateUser()
     {
-        Intent register = new Intent(Login.this,Register.class);
-        Login.this.startActivity(register);
+        boolean isValid = true;
+        String userPattern ="[a-zA-Z0-9]+";
+
+        if ("".equals( login_Username_value))
+        {
+            login_Username.setError("Empty Field");
+            login_Username.requestFocus();
+            return false;
+        }
+        if ("".equals( login_Password_value))
+        {
+            login_Password.setError("Empty Field");
+            login_Password.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     private void checkLogin(final String login_Username_value , final String login_Password_value ) {
@@ -72,7 +114,8 @@ public class Login extends AppCompatActivity
                     boolean error = jObj.getBoolean("error");
                     if(!error)
                     {
-                        Toast.makeText(getApplication(), "Successfully Login", Toast.LENGTH_LONG).show();
+                        Intent login = new Intent(Login.this,module_navigation.class);
+                        Login.this.startActivity(login);
                     }
                     else
                     {
@@ -87,6 +130,8 @@ public class Login extends AppCompatActivity
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),
+                        "Network Error" , Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         });
