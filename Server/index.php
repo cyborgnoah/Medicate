@@ -14,7 +14,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
     $email = $_GET['Email'];
     $password = $_GET['Password'];
     $user = $db->storeUser($name, $username , $email , $password);
-    else if ($user==true)
+    if ($user)
     {
       $response["error"] = FALSE;
       $response["error_msg"] = "Registration Successful";
