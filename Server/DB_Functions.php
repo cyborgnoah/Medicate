@@ -36,7 +36,7 @@ class DB_Functions
         $result = mysqli_query($this->db->con,$sql) or die(mysqli_error($this->db->con));
         if ($result)
         {
-            return true;
+            return "true";
         }
         else
         {
