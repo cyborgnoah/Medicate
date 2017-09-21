@@ -30,7 +30,6 @@ class DB_Functions
         $no_of_rows = mysqli_num_rows($result);
         if ($no_of_rows > 0)
         {
-            $result = mysqli_fetch_array($result);
             return "Duplicate Email";
         }
         $sql = "INSERT INTO userinfo(Name,Username,Email, Password) VALUES('$name', '$username' , '$email' , '$password')";

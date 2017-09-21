@@ -26,7 +26,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       $response["error_msg"] = "Duplicate Email";
       echo json_encode($response);
     }
-    else if ($user)
+    else if ($user==true)
     {
       $response["error"] = FALSE;
       $response["error_msg"] = "Registration Successful";
