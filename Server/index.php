@@ -14,7 +14,19 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
     $email = $_GET['Email'];
     $password = $_GET['Password'];
     $user = $db->storeUser($name, $username , $email , $password);
-    if ($user)
+    if($user=="Duplicate Username")
+    {
+      $response["error"] = FALSE;
+      $response["error_msg"] = "Duplicate Username";
+      echo json_encode($response);
+    }
+    else if($user=="Duplicate Email")
+    {
+      $response["error"] = FALSE;
+      $response["error_msg"] = "Duplicate Email";
+      echo json_encode($response);
+    }
+    else if ($user)
     {
       $response["error"] = FALSE;
       $response["error_msg"] = "Registration Successful";
@@ -52,7 +64,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
   {
       $response["error"] = TRUE;
       $response["error_msg"] = "Incorrect token or password!";
-      echo json_encode($response);    
+      echo json_encode($response);
   }
 }
 else

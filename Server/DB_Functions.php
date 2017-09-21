@@ -18,6 +18,21 @@ class DB_Functions
     //Register User
     public function storeUser($name, $username , $email , $password)
     {
+        $sql = "SELECT Username FROM userinfo WHERE Username = '$username'";
+        $result = mysqli_query($this->db->con,$sql) or die(mysqli_error($this->db->con));
+        $no_of_rows = mysqli_num_rows($result);
+        if ($no_of_rows > 0)
+        {
+            return "Duplicate Username";
+        }
+        $sql = "SELECT Email FROM userinfo WHERE Email = '$email'";
+        $result = mysqli_query($this->db->con,$sql) or die(mysqli_error($this->db->con));
+        $no_of_rows = mysqli_num_rows($result);
+        if ($no_of_rows > 0)
+        {
+            $result = mysqli_fetch_array($result);
+            return "Duplicate Email";
+        }
         $sql = "INSERT INTO userinfo(Name,Username,Email, Password) VALUES('$name', '$username' , '$email' , '$password')";
         $result = mysqli_query($this->db->con,$sql) or die(mysqli_error($this->db->con));
         if ($result)
