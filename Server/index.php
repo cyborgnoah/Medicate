@@ -16,13 +16,13 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
     $user = $db->storeUser($name, $username , $email , $password);
     if($user=="Duplicate Username")
     {
-      $response["error"] = FALSE;
+      $response["error"] = TRUE;
       $response["error_msg"] = "Duplicate Username";
       echo json_encode($response);
     }
     else if($user=="Duplicate Email")
     {
-      $response["error"] = FALSE;
+      $response["error"] = TRUE;
       $response["error_msg"] = "Duplicate Email";
       echo json_encode($response);
     }
