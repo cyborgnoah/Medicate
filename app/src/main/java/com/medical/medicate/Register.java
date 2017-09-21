@@ -161,6 +161,7 @@ public class Register extends AppCompatActivity
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
+                    String error_msg=jObj.getString("error_msg");
                     if (!error)
                     {
                         Toast.makeText(getApplicationContext(), "Regestered successfully", Toast.LENGTH_LONG).show();
@@ -169,11 +170,21 @@ public class Register extends AppCompatActivity
                         finish();
                         setContentView(R.layout.login);
                     }
-                    else
+                    else if(error_msg.matches("Duplicate Username"))
                     {
                         reg_Username.setError("Username Exists");
                         reg_Username.setText("");
                         reg_Username.requestFocus();
+                    }
+                    else if(error_msg.matches("Duplicate Email"))
+                    {
+                        reg_Email.setError("Email Already Registered");
+                        reg_Email.setText("");
+                        reg_Email.requestFocus();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
                     }
                }catch (JSONException e)
                 {

@@ -32,7 +32,7 @@
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/login_layout_Username"
-            android:layout_width="318dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/LoginLabel"
             android:layout_centerHorizontal="true"
@@ -42,7 +42,7 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/login_Username"
-                android:layout_width="318dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_weight="1"
@@ -55,7 +55,7 @@
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/reg_layout_Password"
-            android:layout_width="318dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/login_layout_Username"
             android:layout_below="@+id/login_layout_Username"
