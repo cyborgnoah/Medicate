@@ -153,11 +153,10 @@ public class Register extends AppCompatActivity
         String tag_string_req = "register";
         pDialog.setMessage("Registering ...");
         showDialog();
-        StringRequest sr = new StringRequest(Request.Method.GET, AppURLs.URL+"?tag=register&FullName="+reg_FullName_value+"&Username="+reg_Username_value+"&Email="+reg_Email_value+"&Password="+reg_Password_value ,
-                new Response.Listener<String>()
+        StringRequest sr = new StringRequest(Request.Method.GET, AppURLs.URL+"?tag=register&FullName="+reg_FullName_value+"&Username="+reg_Username_value+"&Email="+reg_Email_value+"&Password="+reg_Password_value ,new Response.Listener<String>()
                 {
-            @Override
-            public void onResponse(String response)
+                    @Override
+                    public void onResponse(String response)
             {
                 hideDialog();
                 try {
