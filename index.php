@@ -6,7 +6,7 @@
 </head>
 <body>
   <?php
-  header("Location: http://localhost/APK/Medicate.apk");
+  header("Location: http://104.131.88.175/APK/Medicate.apk");
   ?>
 </body>
 </html>
