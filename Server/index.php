@@ -14,7 +14,13 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
     $email = $_GET['Email'];
     $password = $_GET['Password'];
     $user = $db->storeUser($name, $username , $email , $password);
-    if($user=="Duplicate Username")
+    else if ($user==true)
+    {
+      $response["error"] = FALSE;
+      $response["error_msg"] = "Registration Successful";
+      echo json_encode($response);
+    }
+    else if($user=="Duplicate Username")
     {
       $response["error"] = TRUE;
       $response["error_msg"] = "Duplicate Username";
@@ -24,12 +30,6 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
     {
       $response["error"] = TRUE;
       $response["error_msg"] = "Duplicate Email";
-      echo json_encode($response);
-    }
-    else if ($user==true)
-    {
-      $response["error"] = FALSE;
-      $response["error_msg"] = "Registration Successful";
       echo json_encode($response);
     }
     else
