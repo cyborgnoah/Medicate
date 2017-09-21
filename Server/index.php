@@ -14,7 +14,6 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
     $email = $_GET['Email'];
     $password = $_GET['Password'];
     $user = $db->storeUser($name, $username , $email , $password);
-    echo $user;
     if ($user=="true")
     {
       $response["error"] = FALSE;
