@@ -21,6 +21,8 @@ public class module_navigation extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -28,6 +30,7 @@ public class module_navigation extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -69,20 +72,23 @@ public class module_navigation extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.perdetail) {
+            Intent per = new Intent(this,per_detail.class);
+            this.startActivity(per);
+        } else if (id == R.id.address) {
 
-        } else if (id == R.id.nav_SOS)
+            Intent per2 = new Intent(this,address_detail.class);
+            this.startActivity(per2);
+        } else if (id == R.id.medical)
         {
-            Intent sos = new Intent(this,Sos.class);
-            this.startActivity(sos);
+            Intent per3 = new Intent(this,history_detail.class);
+            this.startActivity(per3);
         }
-        else if (id == R.id.nav_manage) {
+        else if (id == R.id.other) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.help) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.logout) {
 
         }
 
