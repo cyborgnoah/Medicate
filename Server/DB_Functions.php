@@ -60,6 +60,7 @@ class DB_Functions
         }
     }
 	//personal information
+  //hello
 	public function personal_info($Firstname , $Lastname,$Dateofbirth,$Gender,$Mobile)
 	{
 		$sql = "INSERT INTO form_personal(Firstname,Lastname,Dateofbirth,Gender,Mobile) VALUES('$Firstname', '$Lastname' , '$Dateofbirth' , '$Gender','$Mobile')";
