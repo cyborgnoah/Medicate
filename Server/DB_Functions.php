@@ -59,5 +59,19 @@ class DB_Functions
             return false;
         }
     }
+	//personal information
+	public function personal_info($Firstname , $Lastname,$Dateofbirth,$Gender,$Mobile)
+	{
+		$sql = "INSERT INTO form_personal(Firstname,Lastname,Dateofbirth,Gender,Mobile) VALUES('$Firstname', '$Lastname' , '$Dateofbirth' , '$Gender','$Mobile')";
+        $result = mysqli_query($this->db->con,$sql) or die(mysqli_error($this->db->con));
+        if ($result)
+        {
+            return "true";
+        }
+        else
+        {
+            return false;
+        }
+	}
 }
 ?>
