@@ -60,33 +60,12 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       echo json_encode($response);
     }
   }
-  else if ($tag =='form_personal')
-  {
-    $first_name = $_GET['Firstname'];
-    $last_name = $_GET['Lastname'];
-	$date_of_birth=$_GET['Dateofbirth'];
-	$gender=$_GET['Gender'];
-	$mobile=$_GET['Mobile'];
-    $personal= $db->personal_info($first_name , $last_name,$date_of_birth,$gender,$mobile);
-	if($personal){
-	  $response["error"] = FALSE;
-      $response["error_msg"] = "information saved!";
-      echo json_encode($response);	
-	}
-	else{
-	  $response["error"] = TRUE;
-      $response["error_msg"] = "error occured!";
-      echo json_encode($response);	
-	}
-  }
   else
   {
       $response["error"] = TRUE;
       $response["error_msg"] = "Incorrect token or password!";
       echo json_encode($response);
   }
-  
-  
 }
 else
 {
