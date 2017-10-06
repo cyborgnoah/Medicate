@@ -1,15 +1,24 @@
 <?php
 class Mail_SendVerificationMail
 {
+  function __construct()
+  {
+      require_once 'DB_Connect.php';
+      $this->db = new DB_Connect();
+      $this->db->connect();
+  }
+  // destructor
+  function __destruct()
+  {
+      $this->db->close();
+  }
   public function mail($username,$email)
   {
-    require_once 'db_config.php';
-    $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error($con));
     $hash = md5(rand(0,1000));
     //$username=$_GET['username'];
     //$email=$_GET['email'];
     $sql = "UPDATE userinfo set hash='$hash' where email='$email'";
-    if(mysqli_query($con,$sql))
+    if(mysqli_query($this->db->con,$sql))
     {
       $to      = $email; // Send email to our user
       $subject = 'Verify your Account';
