@@ -1,12 +1,12 @@
 <?php
 require_once 'db_config.php';
-$this->con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error($this->con));
+$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error($this->con));
 $username=$_GET['username'];
 $email=$_GET['email'];
 $hash = md5(rand(0,1000));
 $sql = "UPDATE userinfo set hash='$hash' where email='$email'";
 echo "Hello";
-if(mysqli_query($this->db->con,$sql))
+if(mysqli_query($con,$sql))
 {
   $to      = $email; // Send email to our user
   $subject = 'Verify your Account';
@@ -26,6 +26,6 @@ if(mysqli_query($this->db->con,$sql))
 }
 else
 {
-  echo "Error: " . $sql . "<br>" . $this->con->error;
+  echo "Error: " . $sql . "<br>" . $con->error;
 }
 ?>
