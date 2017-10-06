@@ -1,8 +1,8 @@
 <?php
-/*class Mail_SendVerificationMail
+class Mail_SendVerificationMail
 {
   public function mail($username,$email)
-  {*/
+  {
     require_once 'db_config.php';
     $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error($con));
     $hash = md5(rand(0,1000));
@@ -31,6 +31,6 @@
     {
       echo "False";
     }
-  /*}
-}*/
+  }
+}
 ?>
