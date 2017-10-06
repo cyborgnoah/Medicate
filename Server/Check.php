@@ -1,9 +1,9 @@
 <?php
 require_once 'db_config.php';
-$this->con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error($this->con));
+this->con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(echo mysqli_error($this->con));
 $username=$_GET['username'];
 $email=$_GET['email'];
-$hash = md5( rand(0,1000) );
+$hash = md5(rand(0,1000));
 $sql = "UPDATE userinfo set hash='$hash' where email='$email'";
 if(mysqli_query($this->db->con,$sql))
 {
@@ -25,6 +25,6 @@ if(mysqli_query($this->db->con,$sql))
 }
 else
 {
-  echo "Error: " . $sql . "<br>" . $con->error;
+  echo "Error: " . $sql . "<br>" . $this->con->error;
 }
 ?>
