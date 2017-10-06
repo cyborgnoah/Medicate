@@ -5,6 +5,7 @@
         <item
             android:id="@+id/perdetail"
 
+
             android:title="Personal Details" />
         <item
             android:id="@+id/address"
@@ -28,7 +29,6 @@
         <menu>
             <item
                 android:id="@+id/help"
-
                 android:title="Help" />
             <item
                 android:id="@+id/logout"

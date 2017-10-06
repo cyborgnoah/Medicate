@@ -1,7 +1,9 @@
 package com.medical.medicate;
 
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -11,9 +13,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import android.widget.EditText;
+
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -81,6 +87,7 @@ public class per_detail extends AppCompatActivity {
         fname=(EditText)findViewById(R.id.editText);
         lname=(EditText)findViewById(R.id.editText2);
         dob=(EditText)findViewById(R.id.dob);
+
         img=(ImageButton)findViewById(R.id.imageButton);
         mobile=(EditText)findViewById(R.id.phone);
         male=(RadioButton)findViewById(R.id.male);
@@ -88,12 +95,17 @@ public class per_detail extends AppCompatActivity {
         radioGroup=(RadioGroup)findViewById(R.id.gender);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+
+        /*radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                 if(i==R.id.male){
                     gen="male";
                 }else if(i==R.id.female){
                     gen="female";
+
                     }
             }
         });
@@ -109,9 +121,6 @@ public class per_detail extends AppCompatActivity {
         pYear = cal.get(Calendar.YEAR);
         pMonth = cal.get(Calendar.MONTH);
         pDay = cal.get(Calendar.DAY_OF_MONTH);
-
-
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,6 +138,7 @@ public class per_detail extends AppCompatActivity {
                     if (isValidRegistration)
                     {
                         Log.d("Test0:","Not Reached");
+
                         Toast.makeText(getApplicationContext(), mobile.getText(), Toast.LENGTH_LONG).show();
                         registerUser(first_name, last_name,date_of_birth,gen,mobile_no);
                     }
@@ -173,6 +183,7 @@ public class per_detail extends AppCompatActivity {
             return false;
         }
         if ("".equals(date_of_birth)) {
+
             dob.setError("enter date of birth");
             dob.requestFocus();
             return false;
@@ -198,6 +209,7 @@ public class per_detail extends AppCompatActivity {
 
     private void registerUser(final String first_name ,final String  last_name, final String date_of_birth, final String  gen,final String mobile_no)
     {
+        // Tag used to cancel the request
 
         //String tag_string_req = "register";
         Log.d("Test1:","Not Reached");
@@ -213,6 +225,10 @@ public class per_detail extends AppCompatActivity {
                     if (!error)
                     {
                         Toast.makeText(getApplicationContext(), "Saved successfully", Toast.LENGTH_LONG).show();
+                        /*Intent intent = new Intent(per_detail.this, module_navigation.class);
+                        startActivity(intent);
+                        finish();
+                        setContentView(R.layout.content_module_navigation);*/
                     }
                     else
                     {

@@ -20,6 +20,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
     {
       $response["error"] = FALSE;
       $response["error_msg"] = "Registration Successful";
+
       $output_mail=$mail->mail($username,$email);      
       echo json_encode($response);
     }
@@ -35,6 +36,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       $response["error_msg"] = "Duplicate Email";
       echo json_encode($response);
     }
+
     else
     {
       $response["error"] = TRUE;
@@ -53,9 +55,11 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       $response["Success"] = TRUE;
       $response["error"] = FALSE;
       $response["error_msg"] = "User Exists";
+
       $response["username"] = $user["username"];
       $response["name"] = $user["name"];
       $response["email"] = $user["email"];
+
       echo json_encode($response);
     }
     else
@@ -76,7 +80,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
 	if($personal){
 	  $response["error"] = FALSE;
       $response["error_msg"] = "information saved!";
-      echo json_encode($response);
+      echo json_encode($response);	
 	}
 	else{
 	  $response["error"] = TRUE;
@@ -90,8 +94,6 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       $response["error_msg"] = "Incorrect token or password!";
       echo json_encode($response);
   }
-
-
 }
 else
 {

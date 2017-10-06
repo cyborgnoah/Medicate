@@ -87,6 +87,7 @@ public class module_navigation extends AppCompatActivity
         else if (id == R.id.sos) {
 
         }
+
         else if (id == R.id.other) {
 
         } else if (id == R.id.help) {
