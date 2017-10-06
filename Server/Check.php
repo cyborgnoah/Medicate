@@ -1,9 +1,11 @@
 <?php
+require_once 'db_config.php';
+$this->con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error($this->con));
 $username=$_GET['username'];
 $email=$_GET['email'];
 $hash = md5( rand(0,1000) );
 $sql = "UPDATE userinfo set hash='$hash' where email='$email'";
-if ($conn->query($sql) == TRUE)
+if($this->con->query($sql) == TRUE)
 {
   $to      = $email; // Send email to our user
   $subject = 'Verify your Account';
@@ -18,7 +20,7 @@ if ($conn->query($sql) == TRUE)
 
   Please click this link or copy this link to your browser to activate your account:
   https://104.131.88.175/Server/validate.php?email='.$email.'&hash='.$hash;
-  mail($to, $subject, $message, $headers); 
+  mail($to, $subject, $message, $headers);
 }
 else
 {
