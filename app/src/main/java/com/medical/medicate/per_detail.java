@@ -1,5 +1,9 @@
 package com.medical.medicate;
 
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -9,7 +13,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+
+import android.widget.EditText;
+
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -22,12 +32,51 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 public class per_detail extends AppCompatActivity {
 
     private Button save;
+    private ImageButton img;
+    private RadioButton male,female;
     private EditText fname,lname,dob,mobile;
     private RadioGroup radioGroup;
-    private String first_name,last_name,date_of_birth,mobile_no,gen;
+    private String first_name,last_name,date_of_birth,mobile_no,gen=null;
+
+    private int pYear;
+    private int pMonth;
+    private int pDay;
+    static final int DATE_DIALOG_ID = 0;
+
+    private DatePickerDialog.OnDateSetListener pDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+
+                public void onDateSet(DatePicker view, int year,
+                                      int monthOfYear, int dayOfMonth) {
+                    pYear = year;
+                    pMonth = monthOfYear;
+                    pDay = dayOfMonth;
+                    updateDisplay();
+                }
+            };
+    private void updateDisplay() {
+        dob.setText(
+                new StringBuilder()
+                        .append(pDay).append("/")
+                        .append(pMonth + 1).append("/")
+                        .append(pYear).append(" "));
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                return new DatePickerDialog(this,
+                        pDateSetListener,
+                        pYear, pMonth, pDay);
+        }
+        return null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +87,40 @@ public class per_detail extends AppCompatActivity {
         fname=(EditText)findViewById(R.id.editText);
         lname=(EditText)findViewById(R.id.editText2);
         dob=(EditText)findViewById(R.id.dob);
+
+        img=(ImageButton)findViewById(R.id.imageButton);
         mobile=(EditText)findViewById(R.id.phone);
+        male=(RadioButton)findViewById(R.id.male);
+        female=(RadioButton)findViewById(R.id.female);
+        radioGroup=(RadioGroup)findViewById(R.id.gender);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
 
         /*radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                 if(i==R.id.male){
                     gen="male";
                 }else if(i==R.id.female){
                     gen="female";
-                }
-            }
-        });*/
 
+                    }
+            }
+        });
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(DATE_DIALOG_ID);
+            }
+        });
+        /* set the current date */
+        final Calendar cal = Calendar.getInstance();
+        pYear = cal.get(Calendar.YEAR);
+        pMonth = cal.get(Calendar.MONTH);
+        pDay = cal.get(Calendar.DAY_OF_MONTH);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +138,8 @@ public class per_detail extends AppCompatActivity {
                     if (isValidRegistration)
                     {
                         Log.d("Test0:","Not Reached");
+
+                        Toast.makeText(getApplicationContext(), mobile.getText(), Toast.LENGTH_LONG).show();
                         registerUser(first_name, last_name,date_of_birth,gen,mobile_no);
                     }
                 }
@@ -111,21 +183,22 @@ public class per_detail extends AppCompatActivity {
             return false;
         }
         if ("".equals(date_of_birth)) {
-            dob.setError("Empty Field");
+
+            dob.setError("enter date of birth");
             dob.requestFocus();
             return false;
         }
-        /*if ("".matches(gen))
+        if ((male.isChecked()==false && female.isChecked()==false) || (male.isChecked()==true && female.isChecked()==true))
         {
-            Toast.makeText(getApplicationContext(), "Select the gender", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "select any one gender", Toast.LENGTH_LONG).show();
             return false;
-        }*/
+        }
         if ("".equals(mobile_no)) {
-            mobile.setError("Empty Field");
+            mobile.setError("enter date of birth");
             mobile.requestFocus();
             return false;
         }
-        if(mobile_no.length()>10)
+        if(mobile_no.length()>10 || mobile_no.length()<10)
         {
             mobile.setError("10 digit Mobile number");
             mobile.requestFocus();
@@ -137,6 +210,7 @@ public class per_detail extends AppCompatActivity {
     private void registerUser(final String first_name ,final String  last_name, final String date_of_birth, final String  gen,final String mobile_no)
     {
         // Tag used to cancel the request
+
         //String tag_string_req = "register";
         Log.d("Test1:","Not Reached");
         StringRequest src = new StringRequest(Request.Method.GET, AppURLs.URL+"?tag=form_personal&Firstname="+first_name+"&Lastname="+last_name+"&Dateofbirth="+date_of_birth+"&Gender="+gen+"&Mobile="+mobile_no , new Response.Listener<String>(){

@@ -4,7 +4,9 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
 {
   $tag = $_GET['tag'];
   require_once 'DB_Functions.php';
+  require_once 'Mail_SendVerificationMail.php';
   $db = new DB_Functions();
+  $mail=new Mail_SendVerificationMail();
   $response = array("tag" => $tag, "error" => FALSE);
   //registration
   if ($tag == 'register')
@@ -18,6 +20,8 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
     {
       $response["error"] = FALSE;
       $response["error_msg"] = "Registration Successful";
+
+      $output_mail=$mail->mail($username,$email);      
       echo json_encode($response);
     }
     else if($user=="Duplicate Username")
@@ -32,6 +36,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       $response["error_msg"] = "Duplicate Email";
       echo json_encode($response);
     }
+
     else
     {
       $response["error"] = TRUE;
@@ -50,7 +55,11 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       $response["Success"] = TRUE;
       $response["error"] = FALSE;
       $response["error_msg"] = "User Exists";
-      $response["Username"] = $user;
+
+      $response["username"] = $user["username"];
+      $response["name"] = $user["name"];
+      $response["email"] = $user["email"];
+
       echo json_encode($response);
     }
     else
@@ -76,7 +85,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
 	else{
 	  $response["error"] = TRUE;
       $response["error_msg"] = "error occured!";
-      echo json_encode($response);	
+      echo json_encode($response);
 	}
   }
   else
@@ -85,8 +94,6 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       $response["error_msg"] = "Incorrect token or password!";
       echo json_encode($response);
   }
-  
-  
 }
 else
 {

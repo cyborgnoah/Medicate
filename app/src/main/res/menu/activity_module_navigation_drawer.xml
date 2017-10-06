@@ -4,16 +4,21 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/perdetail"
-            android:icon="@drawable/ic_menu_camera"
+
+
             android:title="Personal Details" />
         <item
             android:id="@+id/address"
-            android:icon="@drawable/ic_menu_gallery"
+
             android:title="Address details" />
         <item
             android:id="@+id/medical"
-            android:icon="@drawable/ic_menu_slideshow"
+
             android:title="Medical history" />
+        <item
+            android:id="@+id/sos"
+
+            android:title="SOS" />
         <item
             android:id="@+id/other"
             android:icon="@drawable/ic_menu_manage"
@@ -24,7 +29,6 @@
         <menu>
             <item
                 android:id="@+id/help"
-                android:icon="@drawable/ic_menu_share"
                 android:title="Help" />
             <item
                 android:id="@+id/logout"

@@ -32,12 +32,16 @@ public class Login extends AppCompatActivity
     private ProgressDialog progressDialog;
     AlertDialogManager alert = new AlertDialogManager();
     SessionManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+
         Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -118,10 +122,12 @@ public class Login extends AppCompatActivity
                     {
                         Intent login = new Intent(Login.this,module_navigation.class);
                         Login.this.startActivity(login);
+
                         String name=jObj.getString("name");
                         String username=jObj.getString("username");
                         String email=jObj.getString("email");
                         session.createLoginSession(name, username ,email);
+
 
                     }
                     else
