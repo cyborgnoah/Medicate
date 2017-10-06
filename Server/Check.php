@@ -27,5 +27,4 @@ else
 {
   echo "Error: " . $sql . "<br>" . $con->error;
 }
-return(NULL);
 ?>
