@@ -25,7 +25,7 @@
       Please click this link or copy this link to your browser to activate your account:
       http://104.131.88.175/Server/Mail_ValidateURL.php?email='.$email.'&hash='.$hash;
       mail($to, $subject, $message, $headers);
-      echo "True"
+      echo "True";
     }
     else
     {
