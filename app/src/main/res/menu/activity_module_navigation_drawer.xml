@@ -4,19 +4,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/perdetail"
-            android:icon="@drawable/personal"
+
             android:title="Personal Details" />
         <item
             android:id="@+id/address"
-            android:icon="@drawable/address"
+
             android:title="Address details" />
         <item
             android:id="@+id/medical"
-            android:icon="@drawable/medical"
+
             android:title="Medical history" />
         <item
             android:id="@+id/sos"
-            android:icon="@drawable/sos"
+
             android:title="SOS" />
         <item
             android:id="@+id/other"
@@ -28,7 +28,7 @@
         <menu>
             <item
                 android:id="@+id/help"
-                android:icon="@drawable/help"
+
                 android:title="Help" />
             <item
                 android:id="@+id/logout"
