@@ -19,6 +19,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       $response["error"] = FALSE;
       $response["error_msg"] = "Registration Successful";
       echo json_encode($response);
+      verifymail($username , $email);
     }
     else if($user=="Duplicate Username")
     {
