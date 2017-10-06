@@ -1,11 +1,13 @@
 <?php
-class Mail_SendVerificationMail
+/*class Mail_SendVerificationMail
 {
   public function mail($username,$email)
-  {
+  {*/
     require_once 'db_config.php';
     $con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error($con));
     $hash = md5(rand(0,1000));
+    $username=$_GET['username'];
+    $email=$_GET['email'];
     $sql = "UPDATE userinfo set hash='$hash' where email='$email'";
     if(mysqli_query($con,$sql))
     {
@@ -23,12 +25,12 @@ class Mail_SendVerificationMail
       Please click this link or copy this link to your browser to activate your account:
       http://104.131.88.175/Server/Mail_ValidateURL.php?email='.$email.'&hash='.$hash;
       mail($to, $subject, $message, $headers);
-      echo"Email Send";
+      echo "True"
     }
     else
     {
-      echo "Error: " . $sql . "<br>" . $con->error;
+      echo "False";
     }
-  }
-}
+  /*}
+}*/
 ?>
