@@ -5,7 +5,7 @@ $username=$_GET['username'];
 $email=$_GET['email'];
 $hash = md5( rand(0,1000) );
 $sql = "UPDATE userinfo set hash='$hash' where email='$email'";
-if($this->con->query($sql) == TRUE)
+if(mysqli_query($this->db->con,$sql))
 {
   $to      = $email; // Send email to our user
   $subject = 'Verify your Account';
@@ -21,10 +21,11 @@ if($this->con->query($sql) == TRUE)
   Please click this link or copy this link to your browser to activate your account:
   https://104.131.88.175/Server/validate.php?email='.$email.'&hash='.$hash;
   mail($to, $subject, $message, $headers);
+  echo"Email Send";
 }
 else
 {
- //echo "Error: " . $sql . "<br>" . $conn->error;
+  echo "Error: " . $sql . "<br>" . $con->error;
 }
 return(NULL);
 ?>
