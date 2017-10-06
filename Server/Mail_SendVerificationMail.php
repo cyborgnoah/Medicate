@@ -1,5 +1,5 @@
 <?php
-/*class Mail_SendVerificationMail
+class Mail_SendVerificationMail
 {
   function __construct()
   {
@@ -13,7 +13,7 @@
       $this->db->close();
   }
   public function mail($username,$email)
-  {*/
+  {
     $hash = md5(rand(0,1000));
     //$username=$_GET['username'];
     //$email=$_GET['email'];
@@ -40,6 +40,6 @@
     {
       return "False";
     }
-  /*}
-}*/
+  }
+}
 ?>
