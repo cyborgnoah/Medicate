@@ -20,7 +20,7 @@ if(mysqli_query($con,$sql))
   ------------------------
 
   Please click this link or copy this link to your browser to activate your account:
-  https://104.131.88.175/Server/validate.php?email='.$email.'&hash='.$hash;
+  http://104.131.88.175/Server/validate.php?email='.$email.'&hash='.$hash;
   mail($to, $subject, $message, $headers);
   echo"Email Send";
 }
