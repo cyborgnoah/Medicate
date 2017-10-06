@@ -53,7 +53,9 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
       $response["Success"] = TRUE;
       $response["error"] = FALSE;
       $response["error_msg"] = "User Exists";
-      $response["Username"] = $user;
+      $response["username"] = $user["username"];
+      $response["name"] = $user["name"];
+      $response["email"] = $user["email"];
       echo json_encode($response);
     }
     else
