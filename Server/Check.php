@@ -5,6 +5,7 @@ $username=$_GET['username'];
 $email=$_GET['email'];
 $hash = md5(rand(0,1000));
 $sql = "UPDATE userinfo set hash='$hash' where email='$email'";
+echo "Hello";
 if(mysqli_query($this->db->con,$sql))
 {
   $to      = $email; // Send email to our user
