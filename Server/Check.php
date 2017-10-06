@@ -1,6 +1,6 @@
 <?php
 require_once 'db_config.php';
-$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error($this->con));
+$con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE) or die(mysqli_error($con));
 $username=$_GET['username'];
 $email=$_GET['email'];
 $hash = md5(rand(0,1000));
