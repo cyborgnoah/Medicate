@@ -5,6 +5,7 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
   $tag = $_GET['tag'];
   require_once 'DB_Functions.php';
   $db = new DB_Functions();
+  $mail=new Mail_SendVerificationMail();
   $response = array("tag" => $tag, "error" => FALSE);
   //registration
   if ($tag == 'register')
@@ -18,8 +19,8 @@ if(isset($_GET['tag']) && $_GET['tag'] != '')
     {
       $response["error"] = FALSE;
       $response["error_msg"] = "Registration Successful";
-      $mail=new Mail_SendVerificationMail();
       $output_mail=$mail->mail($username,$email);
+      echo $output_mail;
       echo json_encode($response);
     }
     else if($user=="Duplicate Username")
