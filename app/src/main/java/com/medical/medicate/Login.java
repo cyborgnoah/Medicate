@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity
         setContentView(R.layout.login);
 
 
-        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
 
 
         progressDialog = new ProgressDialog(this);
@@ -123,10 +123,10 @@ public class Login extends AppCompatActivity
                         Intent login = new Intent(Login.this,module_navigation.class);
                         Login.this.startActivity(login);
 
-                        String name=jObj.getString("name");
-                        String username=jObj.getString("username");
-                        String email=jObj.getString("email");
-                        session.createLoginSession(name, username ,email);
+                        //String name=jObj.getString("name");
+                        //String username=jObj.getString("username");
+                        //String email=jObj.getString("email");
+                        //session.createLoginSession(name, username ,email);
 
 
                     }

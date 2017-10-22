@@ -84,8 +84,10 @@ public class module_navigation extends AppCompatActivity
             Intent per3 = new Intent(this,history_detail.class);
             this.startActivity(per3);
         }
-        else if (id == R.id.sos) {
-
+        else if (id == R.id.sos)
+        {
+            Intent per4 = new Intent(this,Sos.class);
+            this.startActivity(per4);
         }
 
         else if (id == R.id.other) {

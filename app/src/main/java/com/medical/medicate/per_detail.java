@@ -94,8 +94,6 @@ public class per_detail extends AppCompatActivity {
         female=(RadioButton)findViewById(R.id.female);
         radioGroup=(RadioGroup)findViewById(R.id.gender);
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
 
         /*radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 

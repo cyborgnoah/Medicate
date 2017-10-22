@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:name=".AppController"
@@ -26,7 +27,7 @@
             android:name=".module_navigation"
             android:label="@string/title_activity_module_navigation"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Sos" />
+        <activity android:name=".Sos" android:permission="android.permission.SENS_SMS"/>
         <activity android:name=".per_detail" />
         <activity android:name=".history_detail" />
         <activity android:name=".address_detail"></activity>
