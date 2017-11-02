@@ -2,6 +2,7 @@ package com.medical.medicate;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,19 +32,18 @@ public class Navigation_SOS extends AppCompatActivity
         enumber2 = (EditText) findViewById(R.id.navigation_sos_number2);
         enumber3 = (EditText) findViewById(R.id.navigation_sos_number3);
 
-        enumber1_value=enumber1.getText().toString();
-        enumber2_value=enumber2.getText().toString();
-        enumber3_value=enumber3.getText().toString();
-
         save_edit.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                enumber1_value=enumber1.getText().toString();
+                enumber2_value=enumber2.getText().toString();
+                enumber3_value=enumber3.getText().toString();
                 if(validateNumber())
                 {
                 SOS sos = new SOS(enumber1_value, enumber2_value, enumber3_value);
-                mDatabase.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(sos);
+                mDatabase.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("SOS_Service").setValue(sos);
                 }
             }
         });
@@ -51,7 +51,6 @@ public class Navigation_SOS extends AppCompatActivity
 
     public boolean validateNumber()
     {
-
         if (enumber1_value.length()!=10)
         {
             enumber1.setError("Invalid Phone Number");
