@@ -86,6 +86,8 @@ public class module_navigation extends AppCompatActivity
         }
         else if (id == R.id.sos)
         {
+            Intent per4 = new Intent(this,Navigation_SOS.class);
+            this.startActivity(per4);
         }
 
         else if (id == R.id.other) {

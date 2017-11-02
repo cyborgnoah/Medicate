@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/navigation_sos_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="30sp"
+        android:paddingVertical="20sp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/navigation_sos_layout_number1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/navigation_sos_layout_number2"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="28dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/navigation_sos_number1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Emergency Number 1"
+                android:inputType="phone" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/navigation_sos_layout_number2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/navigation_sos_number2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Emergency Number 2"
+                android:inputType="phone"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/navigation_sos_layout_number3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/navigation_sos_layout_number2"
+            android:layout_marginTop="31dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/navigation_sos_number3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Emergency Number 3"
+                android:inputType="phone" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="23dp"
+            android:text="SOS"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/navigation_sos_layout_number1"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="18dp"
+            android:text="I am in medical emergency, reach me as soon as possible. PLEASE NOTE - This message was generarted as a part of the APP Medicate"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <Button
+            android:id="@+id/save_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/navigation_sos_layout_number3"
+            android:layout_marginTop="25dp"
+            android:layout_toStartOf="@+id/textView3"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/activate_deactivate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/save_edit"
+            android:layout_toEndOf="@+id/textView3"
+            android:text="Activate"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

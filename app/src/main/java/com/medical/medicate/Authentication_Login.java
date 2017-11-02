@@ -2,16 +2,20 @@ package com.medical.medicate;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +30,7 @@ public class Authentication_Login extends AppCompatActivity
     private Button LoginButton,RegistrationButton ;
     private EditText login_Username, login_Password ;
     private String login_Username_value,login_Password_value;
+    private TextView ForgetPassword;
     private ProgressDialog pDialog;
 
 
@@ -41,8 +46,9 @@ public class Authentication_Login extends AppCompatActivity
         RegistrationButton = (Button)findViewById(R.id.RegisterButton);
         login_Username= (EditText) findViewById(R.id.login_Username);
         login_Password = (EditText) findViewById(R.id.login_Password);
+        ForgetPassword = (TextView) findViewById(R.id.forget_password);
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
+        final FirebaseUser user = mAuth.getCurrentUser();
         if(user!=null)
         {
             Intent intent = new Intent(getApplicationContext(), module_navigation.class);
@@ -80,6 +86,37 @@ public class Authentication_Login extends AppCompatActivity
             {
                 Intent register = new Intent(Authentication_Login.this,Authentication_Register.class);
                 Authentication_Login.this.startActivity(register);
+            }
+        });
+        ForgetPassword.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(Authentication_Login.this);
+                final EditText edittext = new EditText(getApplicationContext());
+                alert.setMessage("Enter E-mail");
+                alert.setTitle("Forget Password");
+                alert.setView(edittext);
+                alert.setPositiveButton("Ok",new DialogInterface.OnClickListener()
+                {
+                public void onClick(DialogInterface dialog, int whichButton)
+                {
+                    //What ever you want to do with the value
+                    String Email = edittext.getText().toString();
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(Email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("Password Reset", "Email sent.");
+                                        Toast.makeText(getApplication(), "Reset Password Mail Sent", Toast.LENGTH_LONG).show();
+
+                                    }
+                                }
+                            });
+                }
+            });
+                alert.show();
             }
         });
     }
@@ -120,11 +157,19 @@ public class Authentication_Login extends AppCompatActivity
                         {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Login", "signInWithEmail:success");
+                            if(mAuth.getCurrentUser().isEmailVerified())
+                            {
                             Intent intent = new Intent(getApplicationContext(), module_navigation.class);
                             startActivity(intent);
                             finish();
                             setContentView(R.layout.activity_module_navigation);
                             //updateUI(user);
+                            }
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(), "Verify Email",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
                         else
                         {

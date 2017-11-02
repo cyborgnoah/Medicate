@@ -69,8 +69,6 @@
             android:layout_marginTop="33dp"
             app:passwordToggleEnabled="true">
 
-            ssssssssssssssssssss
-
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/reg_ConfrimPassword"
                 android:layout_width="match_parent"
