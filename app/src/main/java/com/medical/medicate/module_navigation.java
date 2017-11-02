@@ -86,16 +86,16 @@ public class module_navigation extends AppCompatActivity
         }
         else if (id == R.id.sos)
         {
-            Intent per4 = new Intent(this,Sos.class);
-            this.startActivity(per4);
         }
 
         else if (id == R.id.other) {
 
         } else if (id == R.id.help) {
 
-        } else if (id == R.id.logout) {
-
+        } else if (id == R.id.logout)
+        {
+            Intent per7 = new Intent(this,Navigation_Logout.class);
+            this.startActivity(per7);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "71702109131",
+    "firebase_url": "https://medicate-c8086.firebaseio.com",
+    "project_id": "medicate-c8086",
+    "storage_bucket": "medicate-c8086.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71702109131:android:8ecf087da4fc66c9",
+        "android_client_info": {
+          "package_name": "com.medical.medicate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71702109131-bnrud9htil5nfj5g9b9184cd2q34c6qo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.medical.medicate",
+            "certificate_hash": "3284f4d80b6ccef1f6f1ed5dcd2a5faa6806236a"
+          }
+        },
+        {
+          "client_id": "71702109131-lel2kc9nbq7ohstl3uuvkdpjqhk22iln.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG0MFybn5BjQnGqG9J0dX17Dwp8Rc9PkY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71702109131-lel2kc9nbq7ohstl3uuvkdpjqhk22iln.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
