@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/save_edit"
             android:layout_toEndOf="@+id/textView3"
-            android:text="Activate"
+            android:text="Start"
             android:textSize="14sp" />
 
     </RelativeLayout>

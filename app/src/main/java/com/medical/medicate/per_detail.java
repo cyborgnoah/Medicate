@@ -211,7 +211,7 @@ public class per_detail extends AppCompatActivity {
 
         //String tag_string_req = "register";
         Log.d("Test1:","Not Reached");
-        StringRequest src = new StringRequest(Request.Method.GET, AppURLs.URL+"?tag=form_personal&Firstname="+first_name+"&Lastname="+last_name+"&Dateofbirth="+date_of_birth+"&Gender="+gen+"&Mobile="+mobile_no , new Response.Listener<String>(){
+        StringRequest src = new StringRequest(Request.Method.GET, "www.google.com?tag=form_personal&Firstname="+first_name+"&Lastname="+last_name+"&Dateofbirth="+date_of_birth+"&Gender="+gen+"&Mobile="+mobile_no , new Response.Listener<String>(){
             @Override
             public void onResponse(String response)
             {
