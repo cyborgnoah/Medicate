@@ -31,6 +31,7 @@
         <activity android:name=".address_detail"></activity>
         <activity android:name=".Navigation_Logout"/>
         <activity android:name=".Navigation_SOS"/>
+        <activity android:name=".Navigation_Chatbot"/>
         <service
             android:name=".Navigation_SOS_Service"
             android:enabled="true"

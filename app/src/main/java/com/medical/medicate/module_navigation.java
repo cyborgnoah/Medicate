@@ -90,7 +90,10 @@ public class module_navigation extends AppCompatActivity
             this.startActivity(per4);
         }
 
-        else if (id == R.id.other) {
+        else if (id == R.id.other)
+        {
+            Intent per5 = new Intent(this,Navigation_Chatbot.class);
+            this.startActivity(per5);
 
         } else if (id == R.id.help) {
 
