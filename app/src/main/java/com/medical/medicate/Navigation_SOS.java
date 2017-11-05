@@ -2,13 +2,14 @@ package com.medical.medicate;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.provider.Telephony;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,13 +17,11 @@ import android.widget.EditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
-import java.util.HashMap;
-import java.util.Map;
+import android.Manifest;
 
 public class Navigation_SOS extends AppCompatActivity
 {
@@ -32,6 +31,8 @@ public class Navigation_SOS extends AppCompatActivity
     private EditText enumber1,enumber2,enumber3;
     private String enumber1_value,enumber2_value,enumber3_value;
     public final static int REQUEST_CODE = 10101;
+    int MY_PERMISSIONS_REQUEST_SEND_SMS;
+    Intent service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,15 +82,36 @@ public class Navigation_SOS extends AppCompatActivity
                                                            Log.d("Here","Inside Activate");
                                                            if (checkDrawOverlayPermission())
                                                            {
+                                                               if (ContextCompat.checkSelfPermission(Navigation_SOS.this,
+                                                                       Manifest.permission.SEND_SMS)
+                                                                       != PackageManager.PERMISSION_GRANTED)
+                                                               {
 
-                                                               startService(new Intent(getApplicationContext(), Navigation_SOS_Service.class));
-                                                               activate_deactivate.setText("Stop");
+                                                                   if (ActivityCompat.shouldShowRequestPermissionRationale(Navigation_SOS.this,
+                                                                           Manifest.permission.SEND_SMS))
+                                                                   {
+                                                                   }
+                                                                   else
+                                                                   {
+                                                                       ActivityCompat.requestPermissions(Navigation_SOS.this,
+                                                                               new String[]{Manifest.permission.SEND_SMS},
+                                                                               MY_PERMISSIONS_REQUEST_SEND_SMS);
+                                                                   }
+                                                               }
+                                                               else
+                                                               {
+                                                                   //startService(new Intent(getApplicationContext(), Navigation_SOS_Service.class));
+                                                                   activate_deactivate.setText("Stop");
+                                                               }
                                                            }
                                                        }
                                                        if(check_activate.equals("Stop"))
                                                        {
-                                                           stopService(new Intent(getApplicationContext(), Navigation_SOS_Service.class));
+                                                           //stopService(new Intent(getApplicationContext(), Navigation_SOS_Service.class));
+                                                           Intent main=new Intent(getApplicationContext(),module_navigation.class);
+                                                           finish();
                                                            activate_deactivate.setText("Start");
+                                                           startActivity(main);
                                                        }
 
                                                    }
@@ -149,10 +171,12 @@ public class Navigation_SOS extends AppCompatActivity
 
     @Override
     @TargetApi(Build.VERSION_CODES.M)
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         if (requestCode == REQUEST_CODE) {
-            if (Settings.canDrawOverlays(this)) {
-                startService(new Intent(this, Navigation_SOS_Service.class));
+            if (Settings.canDrawOverlays(this))
+            {
+                //startService(new Intent(this, Navigation_SOS_Service.class));
             }
         }
     }
