@@ -157,19 +157,18 @@ public class Authentication_Login extends AppCompatActivity
                         {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Login", "signInWithEmail:success");
-                            if(mAuth.getCurrentUser().isEmailVerified())
-                            {
+                            //if(mAuth.getCurrentUser().isEmailVerified())
+                            //{
                             Intent intent = new Intent(getApplicationContext(), module_navigation.class);
                             startActivity(intent);
                             finish();
                             setContentView(R.layout.activity_module_navigation);
                             //updateUI(user);
-                            }
-                            else
-                            {
-                                Toast.makeText(getApplicationContext(), "Verify Email",
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                            //}
+                            //else
+                            //{//   Toast.makeText(getApplicationContext(), "Verify Email",
+                            //            Toast.LENGTH_SHORT).show();
+                            //}
                         }
                         else
                         {
