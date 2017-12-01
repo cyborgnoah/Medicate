@@ -4,6 +4,7 @@ package com.medical.medicate;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;

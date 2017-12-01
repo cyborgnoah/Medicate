@@ -3,6 +3,9 @@ package com.medical.medicate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -71,10 +74,10 @@ public class module_navigation extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment=null;
 
         if (id == R.id.perdetail) {
-            Intent per = new Intent(this,per_detail.class);
-            this.startActivity(per);
+            fragment = new per_detail_2();
         } else if (id == R.id.address) {
 
             Intent per2 = new Intent(this,address_detail.class);
@@ -101,6 +104,15 @@ public class module_navigation extends AppCompatActivity
         {
             Intent per7 = new Intent(this,Navigation_Logout.class);
             this.startActivity(per7);
+        }
+
+        if(fragment!=null)
+        {
+            FragmentManager fragmentManager=getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container,fragment);
+            fragmentTransaction.commit();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
