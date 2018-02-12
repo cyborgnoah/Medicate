@@ -9,7 +9,7 @@
  <RelativeLayout
      android:layout_width="match_parent"
      android:layout_height="match_parent"
-     android:onClick="selectDate">
+     >
 
   <TextView
       android:id="@+id/text1"
@@ -67,7 +67,6 @@
       android:layout_alignBottom="@+id/dob"
       android:layout_alignEnd="@+id/editText2"
       android:cropToPadding="true"
-      android:onClick="selectDate"
       app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
   <TextView
