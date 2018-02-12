@@ -49,7 +49,7 @@ public class per_detail extends AppCompatActivity {
     private int pDay;
     static final int DATE_DIALOG_ID = 0;
 
-    private DatePickerDialog.OnDateSetListener pDateSetListener =
+   /* private DatePickerDialog.OnDateSetListener pDateSetListener =
             new DatePickerDialog.OnDateSetListener() {
 
                 public void onDateSet(DatePicker view, int year,
@@ -68,16 +68,8 @@ public class per_detail extends AppCompatActivity {
                         .append(pYear).append(" "));
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DATE_DIALOG_ID:
-                return new DatePickerDialog(this,
-                        pDateSetListener,
-                        pYear, pMonth, pDay);
-        }
-        return null;
-    }
+*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

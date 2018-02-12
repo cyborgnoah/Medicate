@@ -29,12 +29,18 @@ public class module_navigation extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
         navigationView.setNavigationItemSelectedListener(this);
+
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container,new Home());
+        fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Home");
+
     }
 
     @Override
@@ -77,20 +83,27 @@ public class module_navigation extends AppCompatActivity
         Fragment fragment=null;
 
         if (id == R.id.perdetail) {
-            fragment = new per_detail_2();
-        } else if (id == R.id.address) {
 
-            Intent per2 = new Intent(this,address_detail.class);
-            this.startActivity(per2);
+            fragment = new per_detail_2();
+            getSupportActionBar().setTitle("Personal Details");
+
+        }else if (id == R.id.home) {
+
+            fragment = new Home();
+            getSupportActionBar().setTitle("Home");
+
+        }else if (id == R.id.address) {
+
+            fragment = new Home();
+            getSupportActionBar().setTitle("Address");
+
         } else if (id == R.id.medical)
         {
-            Intent per3 = new Intent(this,history_detail.class);
-            this.startActivity(per3);
+            getSupportActionBar().setTitle("Medical Record");
         }
         else if (id == R.id.sos)
         {
-            Intent per4 = new Intent(this,Navigation_SOS.class);
-            this.startActivity(per4);
+            getSupportActionBar().setTitle("SOS Service");
         }
 
         else if (id == R.id.other)
@@ -112,7 +125,6 @@ public class module_navigation extends AppCompatActivity
             FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container,fragment);
             fragmentTransaction.commit();
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -3,22 +3,25 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/home"
+            android:icon="@drawable/personal"
+            android:title="Home" />
+        <item
             android:id="@+id/perdetail"
-
-
+            android:icon="@drawable/personal"
             android:title="Personal Details" />
         <item
             android:id="@+id/address"
-
+            android:icon="@drawable/address"
             android:title="Address details" />
         <item
             android:id="@+id/medical"
-
+            android:icon="@drawable/medical"
             android:title="Medical history" />
         <item
             android:id="@+id/sos"
-
-            android:title="SOS" />
+            android:title="SOS"
+            android:icon="@drawable/sos"/>
         <item
             android:id="@+id/other"
             android:icon="@drawable/ic_menu_manage"
