@@ -54,7 +54,7 @@ public class Navigation_Chatbot extends AppCompatActivity
         scrollView=(ScrollView)findViewById(R.id.scroller);
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        final AIConfiguration config = new AIConfiguration("4e5cda3078ce4966adfe356d9bfd9ed1",
+        final AIConfiguration config = new AIConfiguration("aa8be293155a43b6a46669624870dcaf",
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
 

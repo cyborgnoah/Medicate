@@ -2,21 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:paddingBottom="5sp"
+    android:paddingLeft="5sp"
+    android:paddingTop="5sp"
     android:gravity="bottom"
     android:orientation="horizontal">
 
     <EditText
         android:id="@+id/chatbot_message"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:textColorHint="#CFD8DC"
-        android:textColor="#CFD8DC"
+        android:background="@drawable/text_message_area"
+        android:paddingLeft="15sp"
         android:hint="Write a message" />
 
     <ImageView
         android:id="@+id/chatbot_send"
+        android:background="@drawable/image_message_area"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="5"
