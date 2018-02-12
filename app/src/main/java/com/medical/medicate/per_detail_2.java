@@ -3,6 +3,7 @@ package com.medical.medicate;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.IdRes;
@@ -44,7 +45,7 @@ public class    per_detail_2 extends Fragment {
     private EditText fname,lname,dob,mobile;
     private RadioGroup radioGroup;
     private String first_name,last_name,date_of_birth,mobile_no,gen=null;
-
+    private ProgressDialog pDialog =new ProgressDialog(getContext());
 
     public per_detail_2() {
         // Required empty public constructor
@@ -67,6 +68,8 @@ public class    per_detail_2 extends Fragment {
         mReference=mdatabase.getReference();
 
 
+        pDialog.setCancelable(false);
+
         save=(Button)view.findViewById(R.id.save);
         fname=(EditText)view.findViewById(R.id.editText);
         lname=(EditText)view.findViewById(R.id.editText2);
@@ -86,16 +89,18 @@ public class    per_detail_2 extends Fragment {
                     gen="male";
                 }else if(i==R.id.female){
                     gen="female";
-
                 }
             }
         });
+
 
         mdatabase.getReference().child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
                 Message obj = dataSnapshot.child("Personal details").getValue(Message.class);
+                pDialog.setMessage("Fetching Data...Please Wait");
+                showDialog();
                 if (obj != null){
                     fname.setText(obj.First_name);
                     lname.setText(obj.Last_name);
@@ -106,6 +111,7 @@ public class    per_detail_2 extends Fragment {
                     }else{}
                     female.setEnabled(true);
                 }
+                hideDialog();
             }
 
             @Override
@@ -115,7 +121,7 @@ public class    per_detail_2 extends Fragment {
         });
 
 
-
+            
 
 
 
@@ -148,6 +154,18 @@ public class    per_detail_2 extends Fragment {
             this.Mobile=mobile_no;
 
         }
+    }
+
+    private void showDialog()
+    {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog()
+    {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 
 
