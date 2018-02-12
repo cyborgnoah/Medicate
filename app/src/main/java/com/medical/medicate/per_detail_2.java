@@ -45,7 +45,7 @@ public class    per_detail_2 extends Fragment {
     private EditText fname,lname,dob,mobile;
     private RadioGroup radioGroup;
     private String first_name,last_name,date_of_birth,mobile_no,gen=null;
-    private ProgressDialog pDialog =new ProgressDialog(getContext());
+    private ProgressDialog pDialog;
 
     public per_detail_2() {
         // Required empty public constructor
@@ -67,7 +67,7 @@ public class    per_detail_2 extends Fragment {
         mdatabase=FirebaseDatabase.getInstance();
         mReference=mdatabase.getReference();
 
-
+        pDialog =new ProgressDialog(getContext());
         pDialog.setCancelable(false);
 
         save=(Button)view.findViewById(R.id.save);
@@ -80,6 +80,9 @@ public class    per_detail_2 extends Fragment {
         male=(RadioButton)view.findViewById(R.id.male);
         female=(RadioButton)view.findViewById(R.id.female);
         radioGroup=(RadioGroup)view.findViewById(R.id.gender);
+
+        pDialog.setMessage("Fetching Data...Please Wait");
+        showDialog();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -99,8 +102,6 @@ public class    per_detail_2 extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
                 Message obj = dataSnapshot.child("Personal details").getValue(Message.class);
-                pDialog.setMessage("Fetching Data...Please Wait");
-                showDialog();
                 if (obj != null){
                     fname.setText(obj.First_name);
                     lname.setText(obj.Last_name);
