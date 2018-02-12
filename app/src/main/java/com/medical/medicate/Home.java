@@ -9,11 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Home extends Fragment {
+
+    private FirebaseDatabase mdatabase;
+    private DatabaseReference mReference;
 
 
     public Home() {
@@ -32,26 +38,12 @@ public class Home extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
 
-        TabHost host = (TabHost)view.findViewById(R.id.tabHost);
-        host.setup();
+        mdatabase=FirebaseDatabase.getInstance();
+        mReference=mdatabase.getReference();
 
-        //Tab 1
-        TabHost.TabSpec spec = host.newTabSpec("Tab One");
-        spec.setContent(R.id.tab1);
-        spec.setIndicator("Tab One");
-        host.addTab(spec);
 
-        //Tab 2
-        spec = host.newTabSpec("Tab Two");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator("Tab Two");
-        host.addTab(spec);
 
-        //Tab 3
-        spec = host.newTabSpec("Tab Three");
-        spec.setContent(R.id.tab3);
-        spec.setIndicator("Tab Three");
-        host.addTab(spec);
+
 
 
     }

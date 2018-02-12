@@ -4,6 +4,8 @@ package com.medical.medicate;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Message;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +19,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Calendar;
 
 
@@ -26,45 +34,15 @@ import java.util.Calendar;
 public class per_detail_2 extends Fragment {
 
 
+    private FirebaseDatabase mdatabase;
+    private DatabaseReference mReference;
+
     private Button save;
     private ImageButton img;
     private RadioButton male,female;
     private EditText fname,lname,dob,mobile;
     private RadioGroup radioGroup;
     private String first_name,last_name,date_of_birth,mobile_no,gen=null;
-
-    private int pYear;
-    private int pMonth;
-    private int pDay;
-    static final int DATE_DIALOG_ID = 0;
-
-    /*private DatePickerDialog.OnDateSetListener pDateSetListener =
-            new DatePickerDialog.OnDateSetListener() {
-
-                public void onDateSet(DatePicker view, int year,
-                                      int monthOfYear, int dayOfMonth) {
-                    pYear = year;
-                    pMonth = monthOfYear;
-                    pDay = dayOfMonth;
-                    updateDisplay();
-                }
-            };
-    private void updateDisplay() {
-        dob.setText(
-                new StringBuilder()
-                        .append(pDay).append("/")
-                        .append(pMonth + 1).append("/")
-                        .append(pYear).append(" "));
-    }
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DATE_DIALOG_ID:
-                return new DatePickerDialog(this,pDateSetListener,pYear, pMonth, pDay);
-        }
-        return null;
-    }*/
 
 
     public per_detail_2() {
@@ -83,6 +61,10 @@ public class per_detail_2 extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
+        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mdatabase=FirebaseDatabase.getInstance();
+        mReference=mdatabase.getReference();
+
 
         save=(Button)view.findViewById(R.id.save);
         fname=(EditText)view.findViewById(R.id.editText);
@@ -95,37 +77,72 @@ public class per_detail_2 extends Fragment {
         female=(RadioButton)view.findViewById(R.id.female);
         radioGroup=(RadioGroup)view.findViewById(R.id.gender);
 
-        img.setOnClickListener(new View.OnClickListener() {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
             @Override
-            public void onClick(View view) {
-               /* final Calendar c = Calendar.getInstance();
-                pYear = c.get(Calendar.YEAR);
-                pMonth = c.get(Calendar.MONTH);
-                pDay = c.get(Calendar.DAY_OF_MONTH);
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if(i==R.id.male){
+                    gen="male";
+                }else if(i==R.id.female){
+                    gen="female";
 
-                DatePickerDialog dpd = new DatePickerDialog(this,
-                        new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                dob.setText(dayOfMonth + "-"
-                                        + (monthOfYear + 1) + "-" + year);
-
-                            }
-                        }, pYear, pMonth, pDay);
-                dpd.show();
-
-            */}
+                }
+            }
         });
+
+        mdatabase.getReference().child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                Message obj = dataSnapshot.child("Personal details").getValue(Message.class);
+                if (obj != null){
+                    fname.setText(obj.First_name);
+                    lname.setText(obj.Last_name);
+                    dob.setText(obj.Date_of_Birth);
+                    mobile.setText(obj.Mobile);
+                    if(obj.Gender.equals("male")){
+                       male.setEnabled(true);
+                    }else{}
+                    female.setEnabled(true);
+                }
+            }});
+
+
+
+
 
 
         save.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"hello",Toast.LENGTH_LONG).show();
+
+                first_name=fname.getText().toString();
+                last_name=lname.getText().toString();
+                date_of_birth=dob.getText().toString();
+                mobile_no=mobile.getText().toString();
+                Message msg=new Message(first_name,last_name,date_of_birth,gen,mobile_no);
+                mReference.child("users").child(userId).child("Personal details").setValue(msg);
+
             }
         });
 
     }
+
+    public static class Message{
+        public String First_name,Last_name,Date_of_Birth,Mobile,Gender;
+
+        Message(){}
+        Message(String first_name,String last_name ,String date_of_birth,String gen,String mobile_no){
+            this.First_name=first_name;
+            this.Last_name=last_name;
+            this.Date_of_Birth=date_of_birth;
+            this.Gender=gen;
+            this.Mobile=mobile_no;
+
+        }
+    }
+
+
+
 }
