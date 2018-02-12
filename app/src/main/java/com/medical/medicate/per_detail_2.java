@@ -101,10 +101,13 @@ public class    per_detail_2 extends Fragment {
                     lname.setText(obj.Last_name);
                     dob.setText(obj.Date_of_Birth);
                     mobile.setText(obj.Mobile);
-                    if(obj.Gender.equals("male")){
-                       male.setEnabled(true);
-                    }else{}
-                    female.setEnabled(true);
+                    if(obj.Gender.equals("male"))
+                    {
+                       male.setChecked(true);
+                    }else
+                    {
+                        female.setChecked(true);
+                    }
                 }
             }
 
