@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -31,7 +32,7 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class per_detail_2 extends Fragment {
+public class    per_detail_2 extends Fragment {
 
 
     private FirebaseDatabase mdatabase;
@@ -105,7 +106,13 @@ public class per_detail_2 extends Fragment {
                     }else{}
                     female.setEnabled(true);
                 }
-            }});
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
 
