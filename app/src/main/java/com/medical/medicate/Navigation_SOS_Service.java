@@ -66,9 +66,9 @@ public class Navigation_SOS_Service extends Service {
                     Log.d("Number",num1);
                     Log.d("Number",num2);
                     Log.d("Number",num3);
-                    /*smsManager.sendTextMessage(num1, null, sms_message+"", null, null);
+                    smsManager.sendTextMessage(num1, null, sms_message+"", null, null);
                     smsManager.sendTextMessage(num2, null, sms_message+"", null, null);
-                    smsManager.sendTextMessage(num3, null, sms_message+"", null, null);*/
+                    smsManager.sendTextMessage(num3, null, sms_message+"", null, null);
                 }
             }
         };

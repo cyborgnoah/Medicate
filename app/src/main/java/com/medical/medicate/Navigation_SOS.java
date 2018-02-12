@@ -100,14 +100,14 @@ public class Navigation_SOS extends AppCompatActivity
                                                                }
                                                                else
                                                                {
-                                                                   //startService(new Intent(getApplicationContext(), Navigation_SOS_Service.class));
+                                                                   startService(new Intent(getApplicationContext(), Navigation_SOS_Service.class));
                                                                    activate_deactivate.setText("Stop");
                                                                }
                                                            }
                                                        }
                                                        if(check_activate.equals("Stop"))
                                                        {
-                                                           //stopService(new Intent(getApplicationContext(), Navigation_SOS_Service.class));
+                                                           stopService(new Intent(getApplicationContext(), Navigation_SOS_Service.class));
                                                            Intent main=new Intent(getApplicationContext(),module_navigation.class);
                                                            finish();
                                                            activate_deactivate.setText("Start");
@@ -121,7 +121,7 @@ public class Navigation_SOS extends AppCompatActivity
                 public void onClick(View v) {
                     String check=save_edit.getText().toString();
                     Log.d("Success",check+"");
-                    if(check=="Save")
+                    if(check.equals("Save"))
                     {
                     enumber1_value = enumber1.getText().toString();
                     enumber2_value = enumber2.getText().toString();
@@ -141,7 +141,7 @@ public class Navigation_SOS extends AppCompatActivity
                         enumber3.setEnabled(false);
                         save_edit.setText("Edit");
                     }
-                    if(check=="Edit")
+                    if(check.equals("Edit"))
                     {
                         enumber1.setEnabled(true);
                         enumber2.setEnabled(true);

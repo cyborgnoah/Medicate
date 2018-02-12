@@ -103,7 +103,8 @@ public class module_navigation extends AppCompatActivity
         }
         else if (id == R.id.sos)
         {
-            getSupportActionBar().setTitle("SOS Service");
+            Intent per5 = new Intent(this,Navigation_SOS.class);
+            this.startActivity(per5);
         }
 
         else if (id == R.id.other)
