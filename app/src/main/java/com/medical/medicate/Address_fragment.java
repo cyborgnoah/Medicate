@@ -65,36 +65,64 @@ public class Address_fragment extends Fragment {
         checkBox=(CheckBox)view.findViewById(R.id.check);
         save=(Button)view.findViewById(R.id.button2);
 
-        line11=l1.getText().toString();
-        line22=l2.getText().toString();
-        city11=c1.getText().toString();
-        city22=c2.getText().toString();
-        state11=s1.getText().toString();
-        state22=s2.getText().toString();
-        country11=ct1.getText().toString();
-        country22=ct2.getText().toString();
-        p11=p1.getText().toString();
-        p22=p2.getText().toString();
 
-     /*  if(checkBox.isChecked()==true){
-            l2.setText(line11);
-            c2.setText(city11);
-            s2.setText(state11);
-            ct2.setText(coun    try11);
-            p2.setText(p11);
-            l2.setEnabled(false);
-            c2.setEnabled(false);
-            s2.setEnabled(false);
-            ct2.setEnabled(false);
-        }else{
-            l2.setEnabled(true);
-            c2.setEnabled(true);
-            s2.setEnabled(true);
-            ct2.setEnabled(true);
-        }*/
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                line11=l1.getText().toString();
+                city11=c1.getText().toString();
+                state11=s1.getText().toString();
+                country11=ct1.getText().toString();
+                p11=p1.getText().toString();
+
+                if(checkBox.isChecked()==true)
+                {
+                    l2.setText(line11);
+                    c2.setText(city11);
+                    s2.setText(state11);
+                    ct2.setText(country11);
+                    p2.setText(p11);
+                    l2.setEnabled(false);
+                    c2.setEnabled(false);
+                    s2.setEnabled(false);
+                    ct2.setEnabled(false);
+                    p2.setEnabled(false);
+                }
+                else
+                {
+                    l2.setText("");
+                    c2.setText("");
+                    s2.setText("");
+                    ct2.setText("");
+                    p2.setText("");
+                    l2.setEnabled(true);
+                    c2.setEnabled(true);
+                    s2.setEnabled(true);
+                    ct2.setEnabled(true);
+                    p2.setEnabled(true);
+                }
+
+            }
+        });
+
+
+
         save.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
+                line11=l1.getText().toString();
+                line22=l2.getText().toString();
+                city11=c1.getText().toString();
+                city22=c2.getText().toString();
+                state11=s1.getText().toString();
+                state22=s2.getText().toString();
+                country11=ct1.getText().toString();
+                country22=ct2.getText().toString();
+                p11=p1.getText().toString();
+                p22=p2.getText().toString();
 
                 Message ob1=new Message(line11,city11,state11,country11,p11);
                 mReference.child("users").child(userId).child("Present Address").setValue(ob1);
