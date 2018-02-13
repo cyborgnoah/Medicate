@@ -1,0 +1,182 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.medical.medicate.Address_fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/present"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="11dp"
+            android:text="Present Address"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/present"
+            android:layout_below="@+id/present"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="16dp"
+            android:hint="Address Line"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/city1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/present"
+            android:layout_alignStart="@+id/line1"
+            android:layout_below="@+id/line1"
+            android:layout_marginTop="13dp"
+            android:ems="10"
+            android:hint="City"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/state1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/city1"
+            android:layout_alignBottom="@+id/city1"
+            android:layout_alignEnd="@+id/line1"
+            android:layout_marginStart="24dp"
+            android:layout_toEndOf="@+id/city1"
+            android:ems="10"
+            android:hint="State"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/country1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/city1"
+            android:layout_below="@+id/city1"
+            android:layout_marginTop="11dp"
+            android:layout_toStartOf="@+id/state1"
+            android:ems="10"
+            android:hint="Country"
+            android:inputType="textPersonName" />
+
+        <CheckBox
+            android:id="@+id/check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/state1"
+            android:layout_alignStart="@+id/country1"
+            android:layout_below="@+id/country1"
+            android:layout_marginTop="16dp"
+            android:text="If permanant address is same as persent address" />
+
+        <TextView
+            android:id="@+id/permanant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/check"
+            android:layout_below="@+id/check"
+            android:layout_marginTop="14dp"
+            android:text="Permanant Address"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/check"
+            android:layout_alignStart="@+id/permanant"
+            android:layout_below="@+id/permanant"
+            android:inputType="textPersonName"
+            android:hint="Address Line" />
+
+        <EditText
+            android:id="@+id/city2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/country1"
+            android:layout_alignStart="@+id/line2"
+            android:layout_below="@+id/line2"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="City"/>
+
+        <EditText
+            android:id="@+id/state2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/line2"
+            android:layout_alignTop="@+id/city2"
+            android:layout_marginStart="17dp"
+            android:layout_toEndOf="@+id/city2"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="State" />
+
+        <EditText
+            android:id="@+id/country2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/city2"
+            android:layout_below="@+id/city2"
+            android:layout_toStartOf="@+id/state2"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Country" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/state2"
+            android:layout_alignStart="@+id/country2"
+            android:layout_below="@+id/country2"
+            android:layout_marginTop="29dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Save" />
+
+        <EditText
+            android:id="@+id/pin1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/country1"
+            android:layout_alignBottom="@+id/country1"
+            android:layout_alignEnd="@+id/state1"
+            android:layout_alignStart="@+id/state1"
+            android:ems="10"
+            android:hint="Pincode"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/pin2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button2"
+            android:layout_alignEnd="@+id/state2"
+            android:layout_alignStart="@+id/state2"
+            android:ems="10"
+            android:hint="Pincode"
+            android:inputType="number" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

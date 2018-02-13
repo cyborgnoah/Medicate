@@ -27,8 +27,6 @@
             android:label="@string/title_activity_module_navigation"
             android:theme="@style/AppTheme" />
         <activity android:name=".per_detail" />
-        <activity android:name=".history_detail" />
-        <activity android:name=".address_detail"></activity>
         <activity android:name=".Navigation_Logout"/>
         <activity android:name=".Navigation_SOS"/>
         <activity android:name=".Navigation_Chatbot"/>
