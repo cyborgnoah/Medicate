@@ -30,9 +30,11 @@
 
     <item android:title="Communicate">
         <menu>
-            <item
+            <item android:title="Help"
                 android:id="@+id/help"
-                android:title="Help" />
+                android:icon="@drawable/personal"/>
+
+
             <item
                 android:id="@+id/logout"
                 android:icon="@drawable/ic_menu_send"

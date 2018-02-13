@@ -81,7 +81,7 @@ public class    per_detail_2 extends Fragment {
         female=(RadioButton)view.findViewById(R.id.female);
         radioGroup=(RadioGroup)view.findViewById(R.id.gender);
 
-        pDialog.setMessage("Fetching Data...Please Wait");
+        pDialog.setMessage("Fetching Form...Please Wait");
         showDialog();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -132,7 +132,7 @@ public class    per_detail_2 extends Fragment {
         save.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"hello",Toast.LENGTH_LONG).show();
+
 
                 first_name=fname.getText().toString();
                 last_name=lname.getText().toString();
@@ -141,6 +141,7 @@ public class    per_detail_2 extends Fragment {
                 Message msg=new Message(first_name,last_name,date_of_birth,gen,mobile_no);
                 mReference.child("users").child(userId).child("Personal details").setValue(msg);
 
+                Toast.makeText(getActivity(),"Date saved",Toast.LENGTH_LONG).show();
             }
         });
 
