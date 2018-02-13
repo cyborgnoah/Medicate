@@ -63,6 +63,7 @@ public class Address_fragment extends Fragment {
         p1=(EditText)view.findViewById(R.id.pin1);
         p2=(EditText)view.findViewById(R.id.pin2);
         checkBox=(CheckBox)view.findViewById(R.id.check);
+        save=(Button)view.findViewById(R.id.button2);
 
         line11=l1.getText().toString();
         line22=l2.getText().toString();
@@ -79,7 +80,7 @@ public class Address_fragment extends Fragment {
             l2.setText(line11);
             c2.setText(city11);
             s2.setText(state11);
-            ct2.setText(country11);
+            ct2.setText(coun    try11);
             p2.setText(p11);
             l2.setEnabled(false);
             c2.setEnabled(false);
