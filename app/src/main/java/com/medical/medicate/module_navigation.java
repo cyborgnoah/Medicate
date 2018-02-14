@@ -112,12 +112,20 @@ public class module_navigation extends AppCompatActivity
             Intent per5 = new Intent(this,Navigation_Chatbot.class);
             this.startActivity(per5);
 
-        }/* else if (id == R.id.help) {
+        }else if (id == R.id.help) {
 
-        } */else if (id == R.id.logout)
+        } else if (id == R.id.logout)
         {
             Intent per7 = new Intent(this,Navigation_Logout.class);
             this.startActivity(per7);
+
+        }else if(id==R.id.appointment){
+            fragment = new book_appointment();
+            getSupportActionBar().setTitle("Book Appointment");
+
+        }else if(id==R.id.myappointment){
+
+            getSupportActionBar().setTitle("My Appointments");
         }
 
         if(fragment!=null)
