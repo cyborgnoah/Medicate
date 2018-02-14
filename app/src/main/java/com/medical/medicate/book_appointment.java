@@ -47,10 +47,8 @@ public class book_appointment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mdatabase=FirebaseDatabase.getInstance();
+        mdatabase=FirebaseDatabase.getInstance("https://medicate-c8086-ee60d.firebaseio.com");
         mReference=mdatabase.getReference();
-
-
 
         Spinner spin = (Spinner) view.findViewById(R.id.spinner);
         ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,namesList);
@@ -63,6 +61,7 @@ public class book_appointment extends Fragment {
                 for(DataSnapshot messageSnapshot:dataSnapshot.getChildren())
                 {
                     Message msg = messageSnapshot.getValue(Message.class);
+                    Toast.makeText(getActivity(),msg.Hospital_Name,Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -80,9 +79,9 @@ public class book_appointment extends Fragment {
         public String Hospital_Name;
 
         Message(){}
-        Message(String hospital_name){
+        Message(String Hospital_Name){
 
-            this.Hospital_Name=hospital_name;
+            this.Hospital_Name=Hospital_Name;
         }
     }
 }
