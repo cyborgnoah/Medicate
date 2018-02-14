@@ -166,14 +166,18 @@ public class Address_fragment extends Fragment {
                 country22=ct2.getText().toString();
                 p11=p1.getText().toString();
                 p22=p2.getText().toString();
+                boolean isValidRegistration = validateUser();
+                if (isValidRegistration)
+                {
+                    Message ob1=new Message(line11,city11,state11,country11,p11);
+                    mReference.child("users").child(userId).child("Present Address").setValue(ob1);
 
-                Message ob1=new Message(line11,city11,state11,country11,p11);
-                mReference.child("users").child(userId).child("Present Address").setValue(ob1);
+                    Message ob2=new Message(line22,city22,state22,country22,p22);
+                    mReference.child("users").child(userId).child("Permanent Address").setValue(ob2);
 
-                Message ob2=new Message(line22,city22,state22,country22,p22);
-                mReference.child("users").child(userId).child("Permanent Address").setValue(ob2);
+                    Toast.makeText(getActivity(), "Data Saved", Toast.LENGTH_LONG).show();
 
-                Toast.makeText(getActivity(), "Data Saved", Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -192,6 +196,129 @@ public class Address_fragment extends Fragment {
             this.Country=country;
             this.pincode=pincode;
         }
+    }
+
+    public boolean validateUser()
+    {
+
+        String fullnamePattern = "[a-zA-Z]+";
+        if ("".equals(line11))
+        {
+            l1.setError("Empty Field");
+            l1.requestFocus();
+            return false;
+        }
+        if ("".equals(city11))
+        {
+            c1.setError("Empty Field");
+            c1.requestFocus();
+            return false;
+        }
+        if (!city11.matches(fullnamePattern))
+        {
+            c1.setError("character form");
+            c1.setText("");
+            c1.requestFocus();
+            return false;
+        }
+        if ("".equals(state11))
+        {
+            s1.setError("Empty Field");
+            s1.requestFocus();
+            return false;
+        }
+        if (!state11.matches(fullnamePattern))
+        {
+            s1.setError("character form");
+            s1.setText("");
+            s1.requestFocus();
+            return false;
+        }
+        if ("".equals(country11))
+        {
+            ct1.setError("Empty Field");
+            ct1.requestFocus();
+            return false;
+        }
+        if (!country11.matches(fullnamePattern))
+        {
+            ct1.setError("character form");
+            ct1.setText("");
+            ct1.requestFocus();
+            return false;
+        }
+        if ("".equals(p11)) {
+            p1.setError("Empty Field");
+            p1.requestFocus();
+            return false;
+        }
+        if(p11.length()>6 || p11.length()<6)
+        {
+            p1.setError("6 digit pin code");
+            p1.requestFocus();
+            return false;
+        }
+        if ("".equals(line22))
+        {
+            l2.setError("Empty Field");
+            l2.requestFocus();
+            return false;
+        }
+
+        if ("".equals(city22))
+        {
+            c2.setError("Empty Field");
+            c2.requestFocus();
+            return false;
+        }
+        if (!city22.matches(fullnamePattern))
+        {
+            c2.setError("character form");
+            c2.setText("");
+            c2.requestFocus();
+            return false;
+        }
+
+        if ("".equals(state22))
+        {
+            s2.setError("Empty Field");
+            s2.requestFocus();
+            return false;
+        }
+        if (!state22.matches(fullnamePattern))
+        {
+            s2.setError("character form");
+            s2.setText("");
+            s2.requestFocus();
+            return false;
+        }
+
+        if ("".equals(country22))
+        {
+            ct2.setError("Empty Field");
+            ct2.requestFocus();
+            return false;
+        }
+        if (!country22.matches(fullnamePattern))
+        {
+            ct2.setError("character form");
+            ct2.setText("");
+            ct2.requestFocus();
+            return false;
+        }
+
+        if ("".equals(p22)) {
+            p2.setError("Empty Field");
+            p2.requestFocus();
+            return false;
+        }
+        if(p22.length()>6 || p22.length()<6)
+        {
+            p2.setError("6 digit pin code");
+            p2.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     private void showDialog()

@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -138,10 +139,16 @@ public class    per_detail_2 extends Fragment {
                 last_name=lname.getText().toString();
                 date_of_birth=dob.getText().toString();
                 mobile_no=mobile.getText().toString();
-                Message msg=new Message(first_name,last_name,date_of_birth,gen,mobile_no);
-                mReference.child("users").child(userId).child("Personal details").setValue(msg);
+                boolean isValidRegistration = validateUser();
+                if (isValidRegistration)
+                {
+                    Message msg=new Message(first_name,last_name,date_of_birth,gen,mobile_no);
+                    mReference.child("users").child(userId).child("Personal details").setValue(msg);
 
-                Toast.makeText(getActivity(),"Date saved",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"Date saved",Toast.LENGTH_LONG).show();
+
+                }
+
             }
         });
 
@@ -159,6 +166,61 @@ public class    per_detail_2 extends Fragment {
             this.Mobile=mobile_no;
 
         }
+    }
+
+    public boolean validateUser()
+    {
+
+        String fullnamePattern = "[a-zA-Z]+";
+        if ("".equals(first_name))
+        {
+            fname.setError("Empty Field");
+            fname.requestFocus();
+            return false;
+        }
+        if (!first_name.matches(fullnamePattern))
+        {
+            fname.setError("character form");
+            fname.setText("");
+            fname.requestFocus();
+            return false;
+        }
+        if ("".equals(last_name))
+        {
+            lname.setError("Empty Field");
+            lname.requestFocus();
+            return false;
+        }
+        if (!last_name.matches(fullnamePattern))
+        {
+            lname.setError("character form");
+            lname.setText("");
+            lname.requestFocus();
+            return false;
+        }
+        if ("".equals(date_of_birth)) {
+
+            dob.setError("Empty Field");
+            dob.requestFocus();
+            return false;
+        }
+        if ((male.isChecked()==false && female.isChecked()==false) || (male.isChecked()==true && female.isChecked()==true))
+        {
+            Toast.makeText(getActivity(), "select any one gender", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if ("".equals(mobile_no)) {
+            mobile.setError("Empty Field");
+            mobile.requestFocus();
+            return false;
+        }
+        if(mobile_no.length()>10 || mobile_no.length()<10)
+        {
+            mobile.setError("10 digit Mobile number");
+            mobile.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     private void showDialog()
