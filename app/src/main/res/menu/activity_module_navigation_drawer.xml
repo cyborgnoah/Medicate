@@ -16,26 +16,27 @@
             android:icon="@drawable/personal"
             android:title="My Appointment" />
         <item
-            android:id="@+id/perdetail"
-            android:icon="@drawable/personal"
-            android:title="Personal Details" />
-        <item
-            android:id="@+id/address"
-            android:icon="@drawable/address"
-            android:title="Address details" />
-        <item
-            android:id="@+id/medical"
-            android:icon="@drawable/medical"
-            android:title="Medical history" />
-        <item
             android:id="@+id/sos"
             android:title="SOS"
             android:icon="@drawable/sos"/>
         <item
             android:id="@+id/other"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Others" />
+            android:title="AI Doctor" />
     </group>
+
+    <item android:title="User Details">
+        <menu>
+            <item
+                android:id="@+id/perdetail"
+                android:icon="@drawable/personal"
+                android:title="Personal Details" />
+            <item
+                android:id="@+id/address"
+                android:icon="@drawable/address"
+                android:title="Address details" />
+        </menu>
+    </item>
 
     <item android:title="Communicate">
         <menu>
