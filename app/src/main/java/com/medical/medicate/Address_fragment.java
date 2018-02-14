@@ -1,6 +1,7 @@
 package com.medical.medicate;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -30,6 +34,7 @@ public class Address_fragment extends Fragment {
     private CheckBox checkBox;
     private Button save;
     private String line11,line22,city11,city22,state11,state22,country11,country22,p11,p22;
+    private ProgressDialog pDialog;
 
 
     public Address_fragment() {
@@ -52,6 +57,9 @@ public class Address_fragment extends Fragment {
         mdatabase=FirebaseDatabase.getInstance();
         mReference=mdatabase.getReference();
 
+        pDialog =new ProgressDialog(getContext());
+        pDialog.setCancelable(false);
+
         l1=(EditText) view.findViewById(R.id.line1);
         l2=(EditText) view.findViewById(R.id.line2);
         c1=(EditText) view.findViewById(R.id.city1);
@@ -64,6 +72,41 @@ public class Address_fragment extends Fragment {
         p2=(EditText)view.findViewById(R.id.pin2);
         checkBox=(CheckBox)view.findViewById(R.id.check);
         save=(Button)view.findViewById(R.id.button2);
+
+        pDialog.setMessage("Fetching Form...Please Wait");
+        showDialog();
+
+        mdatabase.getReference().child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                Message obj1 = dataSnapshot.child("Present Address").getValue(Message.class);
+                Message obj2 = dataSnapshot.child("Permanent Address").getValue(Message.class);
+
+                if(obj1!=null){
+                    l1.setText(obj1.Address);
+                    c1.setText(obj1.City);
+                    s1.setText(obj1.State);
+                    ct1.setText(obj1.Country);
+                    p1.setText(obj1.pincode);
+                }
+                if(obj2!=null){
+                    l2.setText(obj1.Address);
+                    c2.setText(obj1.City);
+                    s2.setText(obj1.State);
+                    ct2.setText(obj1.Country);
+                    p2.setText(obj1.pincode);
+                }
+                hideDialog();
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
 
 
@@ -136,6 +179,9 @@ public class Address_fragment extends Fragment {
         });
     }
 
+
+
+
     public static class Message{
         String Address,City,State,Country,pincode;
         Message(){}
@@ -146,5 +192,17 @@ public class Address_fragment extends Fragment {
             this.Country=country;
             this.pincode=pincode;
         }
+    }
+
+    private void showDialog()
+    {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog()
+    {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 }
