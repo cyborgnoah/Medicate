@@ -39,6 +39,9 @@ public class    per_detail_2 extends Fragment {
 
     private FirebaseDatabase mdatabase;
     private DatabaseReference mReference;
+    private int pYear;
+    private int pMonth;
+    private int pDay;
 
     private Button save;
     private ImageButton img;
@@ -90,9 +93,9 @@ public class    per_detail_2 extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                 if(i==R.id.male){
-                    gen="male";
+                    gen="Male";
                 }else if(i==R.id.female){
-                    gen="female";
+                    gen="Female";
                 }
             }
         });
@@ -108,7 +111,7 @@ public class    per_detail_2 extends Fragment {
                     lname.setText(obj.Last_name);
                     dob.setText(obj.Date_of_Birth);
                     mobile.setText(obj.Mobile);
-                    if(obj.Gender.equals("male"))
+                    if(obj.Gender.equals("Male"))
                     {
                        male.setChecked(true);
                     }else
@@ -125,6 +128,25 @@ public class    per_detail_2 extends Fragment {
             }
         });
 
+        final Calendar cal = Calendar.getInstance();
+        pYear = cal.get(Calendar.YEAR);
+        pMonth = cal.get(Calendar.MONTH);
+        pDay = cal.get(Calendar.DAY_OF_MONTH);
+
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog=new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int yr, int monthofyear, int dayofmonth) {
+                        monthofyear=monthofyear+1;
+                        dob.setText(dayofmonth+"/"+monthofyear+"/"+yr);
+                    }
+                },pYear,pMonth,pDay);
+                datePickerDialog.show();
+            }
+        });
 
             
 

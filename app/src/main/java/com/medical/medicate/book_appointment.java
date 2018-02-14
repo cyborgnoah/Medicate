@@ -1,6 +1,7 @@
 package com.medical.medicate;
 
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,12 +33,18 @@ import com.google.firebase.database.ValueEventListener;
 public class book_appointment extends Fragment {
 
     public int n=10,i=1;
-    private FirebaseDatabase mdatabase;
-    private DatabaseReference mReference;
-    private String namesList[] =new String[3];
-    private String problems[]={"Choose Option","Heart Problem","Kidney Problems","Sex Problem"};
+    private FirebaseDatabase mdatabase2,mdatabase1;
+    private DatabaseReference mReference2,mReference1;
+    private String namesList[] =new String[7];
     private String timing[]={"Choose Option","Morning Shift(9:30AM - 12:30PM)","Evening Shift(4:30PM - 8:00PM)"};
     private ProgressDialog pDialog;
+    private ImageButton imageButton;
+    private EditText date,name,gen;
+
+    private int pYear;
+    private int pMonth;
+    private int pDay;
+
 
     public book_appointment() {
         // Required empty public constructor
@@ -53,28 +65,64 @@ public class book_appointment extends Fragment {
         namesList[0]="Choose Option";
         pDialog =new ProgressDialog(getContext());
         pDialog.setCancelable(false);
+        imageButton=(ImageButton)view.findViewById(R.id.imageButton);
+        date=(EditText)view.findViewById(R.id.date);
+        name=(EditText)view.findViewById(R.id.name);
+        gen=(EditText)view.findViewById(R.id.gen);
+        final Spinner spin = (Spinner) view.findViewById(R.id.spin);
+        final Spinner spin2=(Spinner)view.findViewById(R.id.spin2);
 
         final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mdatabase=FirebaseDatabase.getInstance("https://medicate-c8086-ee60d.firebaseio.com");
-        mReference=mdatabase.getReference();
+        mdatabase1=FirebaseDatabase.getInstance();
+        mReference1=mdatabase1.getReference();
 
-        final Spinner spin = (Spinner) view.findViewById(R.id.spinner);
-        final Spinner spin2=(Spinner)view.findViewById(R.id.spin2);
-        final Spinner spin3=(Spinner)view.findViewById(R.id.spin3);
+        mdatabase2=FirebaseDatabase.getInstance("https://medicate-c8086-ee60d.firebaseio.com");
+        mReference2=mdatabase2.getReference();
+
+        final Calendar cal = Calendar.getInstance();
+        pYear = cal.get(Calendar.YEAR);
+        pMonth = cal.get(Calendar.MONTH);
+        pDay = cal.get(Calendar.DAY_OF_MONTH);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog=new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int yr, int monthofyear, int dayofmonth) {
+                        monthofyear=monthofyear+1;
+                        date.setText(dayofmonth+"/"+monthofyear+"/"+yr);
+                    }
+                },pYear,pMonth,pDay);
+                datePickerDialog.show();
+            }
+        });
+
+
+        mdatabase2.getReference().child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Message1 obj = dataSnapshot.child("Personal details").getValue(Message1.class);
+                if(obj!=null){
+                    name.setText(obj.First_name+" "+obj.Last_name);
+                    gen.setText(obj.Gender);
+                    Toast.makeText(getActivity(),"database one",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
         pDialog.setMessage("Fetching Form...Please Wait");
         showDialog();
 
-        ArrayAdapter adapter2 = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,problems);
-        spin2.setAdapter(adapter2);
-
-        ArrayAdapter adapter3 = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,timing);
-        spin3.setAdapter(adapter3);
-
-
-
-
-
-        mReference.child("Hospital_Data").addListenerForSingleValueEvent(new ValueEventListener() {
+        mReference2.child("Hospital_Data").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
@@ -84,13 +132,11 @@ public class book_appointment extends Fragment {
                     Log.d("Name",msg.Hospital_Name);
                     namesList[i]=msg.Hospital_Name;
                     i++;
-
                 }
                 ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,namesList);
-                spin.setAdapter(adapter);
+                 spin.setAdapter(adapter);
                 hideDialog();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
@@ -98,6 +144,9 @@ public class book_appointment extends Fragment {
                 // ...
             }
         });
+        ArrayAdapter adapter2 = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,timing);
+        spin2.setAdapter(adapter2);
+
 
     }
     public static class Message{
@@ -107,6 +156,18 @@ public class book_appointment extends Fragment {
         Message(String Hospital_Name){
 
             this.Hospital_Name=Hospital_Name;
+        }
+    }
+
+    public static class Message1{
+        public String First_name,Last_name,Gender;
+
+        Message1(){}
+        Message1(String First_name,String Last_name,String Gender){
+
+            this.First_name=First_name;
+            this.Last_name=Last_name;
+            this.Gender=Gender;
         }
     }
 
