@@ -13,9 +13,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.security.PrivateKey;
 
 public class module_navigation extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+   /* private EditText editText;
+    private FirebaseDatabase mdatabase;
+    private DatabaseReference mReference;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +37,26 @@ public class module_navigation extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+      /* editText=(EditText)findViewById(R.id.user);
+        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mdatabase=FirebaseDatabase.getInstance();
+        mReference=mdatabase.getReference();
+
+       mdatabase.getReference().child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                Message obj = dataSnapshot.child("Personal details").getValue(Message.class);
+                if (obj != null){
+                    editText.setText(obj.First_name);
+
+                }
+            }*/
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -40,6 +70,7 @@ public class module_navigation extends AppCompatActivity
         fragmentTransaction.replace(R.id.fragment_container,new Home());
         fragmentTransaction.commit();
         getSupportActionBar().setTitle("Home");
+
 
     }
 
@@ -97,9 +128,6 @@ public class module_navigation extends AppCompatActivity
             fragment = new Address_fragment();
             getSupportActionBar().setTitle("Address");
 
-        } else if (id == R.id.medical)
-        {
-            getSupportActionBar().setTitle("Medical Record");
         }
         else if (id == R.id.sos)
         {
@@ -140,4 +168,5 @@ public class module_navigation extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
