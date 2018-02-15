@@ -39,7 +39,6 @@ public class book_appointment extends Fragment {
     public int n=10,i=1;
     private FirebaseDatabase mdatabase2,mdatabase1;
     private DatabaseReference mReference2,mReference1;
-    private String namesList[]={"Choose Option"};
     private String timing[]={"Choose Option","Morning Shift(9:30AM - 12:30PM)","Evening Shift(4:30PM - 8:00PM)"};
     private ProgressDialog pDialog;
     private ImageButton imageButton;
