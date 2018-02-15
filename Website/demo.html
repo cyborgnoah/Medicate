@@ -109,26 +109,25 @@
 		<script type="text/javascript">
 		function button_accept(uid_hospital,userid,uid_user_appointment)
 		{
-			alert(uid_hospital+" => "+userid+" => "+uid_user_appointment);
-
 			firebase.auth().onAuthStateChanged(firebaseUser =>{
 			  if(firebaseUser)
 			  {
-					//firebase.database().ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Approved");
-					//firebase.database("https://medicate-c8086-ee60d.firebaseio.com").ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("Approved");
+					//firebase.database("https://medicate-c8086.firebaseio.com").ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Approved");
+					var sec_db=app.database("https://medicate-c8086.firebaseio.com");
+					sec_db.ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Yes");
+					firebase.database().ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("Yes");
 			  }
 			});
 
 		}
 		function button_decline(uid_hospital,userid,uid_user_appointment)
 		{
-			alert(uid_hospital+" => "+userid+" => "+uid_user_appointment);
-
 			firebase.auth().onAuthStateChanged(firebaseUser =>{
 			  if(firebaseUser)
 			  {
-					//firebase.database().ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Declined");
-					//firebase.database("https://medicate-c8086-ee60d.firebaseio.com").ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("Declined");
+					var sec_db=app.database("https://medicate-c8086.firebaseio.com");
+					sec_db.ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("No");
+					firebase.database().ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("No");
 			  }
 			});
 

@@ -192,12 +192,22 @@ public class book_appointment extends Fragment {
                 Age = age.getText().toString();
                 apdate = date.getText().toString();
                 approved="No";
+
                 boolean isValidRegistration = validateUser();
                 if (isValidRegistration) {
                     Message2 appoint1 = new Message2(fullname, gender, Age, hospital, time, apdate, approved );
-                    String TID = mReference1.child("users").child(userId).child("Book Appointment").push().getKey();
-                    mReference1.child("users").child(userId).child("Book Appointment").push().setValue(appoint1);
-                    Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate, userId, approved,TID);
+                    DatabaseReference newDatabaseReference = mReference1.child("users").child(userId).child("Book Appointment").push();
+                    String TID=newDatabaseReference.getKey();
+                    newDatabaseReference.setValue(appoint1);
+                    /*mReference1.child("users").child(userId).child("Book Appointment").push().setValue(appoint1,new DatabaseReference.CompletionListener()
+                    {@Override
+                    public void onComplete(DatabaseError databaseError,
+                        DatabaseReference databaseReference) {
+                        Log.d("Value : ",""+databaseReference.getKey());
+                    }
+                    });*/
+
+                    Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate, userId, approved, TID);
                     mReference2.child("Appointment Requests").child(hospital_uid).push().setValue(appoint2);
 
                     Toast.makeText(getActivity(), "Appointment request generated ", Toast.LENGTH_SHORT).show();

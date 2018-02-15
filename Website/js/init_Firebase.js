@@ -1,4 +1,6 @@
 // Initialize Firebase after validation
+
+var app;
 var config = {
   apiKey: "AIzaSyB0BwBC6aiv2oB4d-esbkPiRxHvzumFYOY",
   authDomain: "medicate-c8086.firebaseapp.com",
@@ -9,5 +11,5 @@ var config = {
 };
 
 if (!firebase.apps.length) {
-    firebase.initializeApp(config);
+    app=firebase.initializeApp(config);
 }
