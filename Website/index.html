@@ -55,19 +55,12 @@
 				<div id="small-dialog1" class="mfp-hide book-form">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h3>Log In </h3>
-					<form action="" method="post">
+
 						<input type="email" name="Email" class="email" placeholder="Hospital Email ID" required="" id="login_email"/>
 						<input type="password" name="Password" class="password" placeholder="Password" required="" id="login_password"/>
-						<ul>
-							<li>
-								<input type="checkbox" id="brand1" value="">
-								<label for="brand1"><span></span>Remember me</label>
-							</li>
-						</ul>
 						<a href="#">Forgot Password?</a><br>
 						<div class="clearfix"></div>
-						<input type="submit" value="Log In" onclick="login()">
-					</form>
+						<input type="submit" value="Log In" onclick="login()" id="login">
 					</div>
 				</div>
 			</div>
@@ -81,12 +74,11 @@
 				<div id="small-dialog2" class="mfp-hide book-form">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h3>Register Hospital</h3>
-					<form action="" method="post">
 						<input type="text" name="Name" placeholder="Hospital Name" required="" id="Name"/>
 						<input type="email" name="Email" class="email" placeholder="Hospital Email" required="" id="Email"/>
 						<input type="password" name="Password" id="password1" class="password" placeholder="Password" required="" />
 						<input type="password" name="Password" id="password2" class="password" placeholder="Confirm Password" required="" />
-						<input type="submit" value="Register" onclick="signup()">
+						<input type="submit" value="Register" onclick="signup()" id="signup">
 					</form>
 				</div>
 			</div>
@@ -404,8 +396,12 @@
 
 	<!--Firebase Initializarion starts-->
 	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-	<script src="js/Firebase_Signup.js"></script>
+	<script src="js/init_Firebase.js"></script>
+	<script src="js/session.js"></script>
 	<!--Firebase Initialization Ends-->
+	<!--Firebase SignUp-->
+	<script src="js/Firebase_Signup.js"></script>
+	<!--//Firebase SignUp-->
 	<!--Firebase Login-->
 	<script src="js/Firebase_Login.js"></script>
 	<!--//Firebase Login-->
