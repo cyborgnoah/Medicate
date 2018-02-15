@@ -4,9 +4,12 @@ package com.medical.medicate;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TabHost;
 
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +23,7 @@ public class Home extends Fragment {
 
     private FirebaseDatabase mdatabase;
     private DatabaseReference mReference;
-
+    
 
     public Home() {
         // Required empty public constructor
@@ -40,6 +43,7 @@ public class Home extends Fragment {
 
         mdatabase=FirebaseDatabase.getInstance();
         mReference=mdatabase.getReference();
+
 
 
 
