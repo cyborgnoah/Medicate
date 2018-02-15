@@ -88,7 +88,7 @@ public class module_navigation extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.module_navigation, menu);
-        return true;
+        return false;
     }
 
     @Override

@@ -27,7 +27,6 @@
             android:name=".module_navigation"
             android:label="@string/title_activity_module_navigation"
             android:theme="@style/AppTheme" />
-        <activity android:name=".per_detail" />
         <activity android:name=".Navigation_Logout" />
         <activity android:name=".Navigation_SOS" />
         <activity android:name=".Navigation_Chatbot" />
@@ -35,12 +34,12 @@
         <service
             android:name=".Navigation_SOS_Service"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".Listview"
             android:label="@string/title_activity_listview"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="20sp"
+    android:layout_marginRight="20sp"
     android:orientation="vertical">
 
     <ListView
@@ -9,6 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:divider="@color/material_blue_grey_800"
-        android:dividerHeight="1dp"
-        android:listSelector="#0f0"/>
+        android:dividerHeight="2dp"
+        android:listSelector="#0ff"
+        />
 </LinearLayout>
