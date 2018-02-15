@@ -1,20 +1,25 @@
+
 var database = firebase.database().ref().child("Hospital_Data");
 /*var authorization=firebase.auth();*/
 function signup()
 {
   if(validater()==true)
   {
-  var hospital_name=document.getElementById('Name');
-  var hospital_email=document.getElementById('Email');
-  var password=document.getElementById('password1');
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error)
-  {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // ...
-});
-  database.push().set({Hospital_Name: hospital_name.value,Hospital_Email: hospital_email.value});
+  var hospital_name=document.getElementById('Name').value;
+  var hospital_email=document.getElementById('Email').value;
+  var password=document.getElementById('password1').value;
+  const promise=firebase.auth().createUserWithEmailAndPassword(hospital_email, password);
+  promise.catch(e=>console.log(e.message));
+  firebase.auth().onAuthStateChanged(firebaseUser =>{
+    if(firebaseUser)
+    {
+      database.push().set({Hospital_Name: hospital_name,Hospital_Email: hospital_email,Uid:firebaseUser.uid});
+    }
+    else
+    {    
+    }
+  });
+
   }
 }
 function validater()

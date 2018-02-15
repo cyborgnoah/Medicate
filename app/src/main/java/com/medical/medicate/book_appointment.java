@@ -49,11 +49,13 @@ public class book_appointment extends Fragment {
     private int pMonth;
     private int pDay;
 
-    private String fullname,gender,Age,hospital,time,apdate,approved;
+    private String fullname,gender,Age,hospital,time,apdate,approved,hospital_email,hospital_uid;
 
     public book_appointment() {
         // Required empty public constructor
     }
+    final List<String> namesList_email = new ArrayList<String>();
+    final List<String> namesList_uid = new ArrayList<String>();
 
 
     @Override
@@ -113,6 +115,9 @@ public class book_appointment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 hospital = adapterView.getItemAtPosition(i).toString();
+                hospital_email=namesList_email.get(i).toString();
+                hospital_uid=namesList_uid.get(i).toString();
+
             }
 
             @Override
@@ -166,6 +171,7 @@ public class book_appointment extends Fragment {
                     for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
                         Message msg = messageSnapshot.getValue(Message.class);
                         namesList.add(msg.Hospital_Name);
+                        namesList_email.add(msg.Hospital_Email);
                     }
 
                     ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, namesList);
@@ -200,7 +206,7 @@ public class book_appointment extends Fragment {
                     Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate,userId,approved);
 
                     mReference1.child("users").child(userId).child("Book Appointment").push().setValue(appoint1);
-                    mReference2.child("Appointment Requests").child(hospital).push().setValue(appoint2);
+                    mReference2.child("Appointment Requests").child(hospital_uid).push().setValue(appoint2);
 
                     Toast.makeText(getActivity(), "Appointment request generated ", Toast.LENGTH_SHORT).show();
                     Toast.makeText(getActivity(), "Check 'My appointment' section for appointment status ", Toast.LENGTH_SHORT).show();
@@ -213,11 +219,15 @@ public class book_appointment extends Fragment {
     }
     public static class Message{
         public String Hospital_Name;
+        public String Hospital_Email;
+        public String Hospital_uid;
 
         Message(){}
-        Message(String Hospital_Name){
+        Message(String Hospital_Name,String Hospital_Email,String Hospital_uid){
 
             this.Hospital_Name=Hospital_Name;
+            this.Hospital_Email=Hospital_Email;
+            this.Hospital_uid=Hospital_uid;
         }
     }
 
