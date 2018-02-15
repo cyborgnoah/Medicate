@@ -93,10 +93,6 @@ public class book_appointment extends Fragment {
         pMonth = cal.get(Calendar.MONTH);
         pDay = cal.get(Calendar.DAY_OF_MONTH);
 
-        //final String hosId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
-
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,10 +112,7 @@ public class book_appointment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 hospital = adapterView.getItemAtPosition(i).toString();
                 hospital_email=namesList_email.get(i).toString();
-                Log.d("Email",hospital_email);
                 hospital_uid=namesList_uid.get(i).toString();
-                Log.d("Email",hospital_uid);
-
             }
 
             @Override
@@ -132,12 +125,10 @@ public class book_appointment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 time = adapterView.getItemAtPosition(i).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
 
         mdatabase1.getReference().child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -154,7 +145,6 @@ public class book_appointment extends Fragment {
                     Toast.makeText(getActivity(),"Fill 'Personal Detail' form first",Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -194,7 +184,6 @@ public class book_appointment extends Fragment {
         ArrayAdapter adapter2 = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, timing);
         spin2.setAdapter(adapter2);
 
-
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,8 +194,8 @@ public class book_appointment extends Fragment {
                 approved="No";
                 boolean isValidRegistration = validateUser();
                 if (isValidRegistration) {
-                    Message2 appoint1 = new Message2(fullname, gender, Age, hospital, time, apdate,approved);
-                    Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate,userId,approved);
+                    Message2 appoint1 = new Message2(fullname, gender, Age, hospital, time, apdate, approved);
+                    Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate, userId, approved);
 
                     mReference1.child("users").child(userId).child("Book Appointment").push().setValue(appoint1);
                     mReference2.child("Appointment Requests").child(hospital_uid).push().setValue(appoint2);
@@ -215,11 +204,10 @@ public class book_appointment extends Fragment {
                     Toast.makeText(getActivity(), "Check 'My appointment' section for appointment status ", Toast.LENGTH_SHORT).show();
 
                 }
-
-
             }
         });
     }
+
     public static class Message{
         public String Hospital_Name;
         public String Hospital_Email;
@@ -258,7 +246,6 @@ public class book_appointment extends Fragment {
             this.Time=Time;
             this.Date=Date;
             this.Approved=Approved;
-
         }
         Message2(String Fullname,String Gender,String Age,String Hospital,String Time,String Date,String userid,String Approve){
 
@@ -270,14 +257,11 @@ public class book_appointment extends Fragment {
             this.Date=Date;
             this.UserId=userid;
             this.Approved=Approve;
-
         }
-
     }
 
     public boolean validateUser()
     {
-
         String fullnamePattern = "[a-zA-Z ]+";
         if ("".equals(fullname))
         {
@@ -316,7 +300,6 @@ public class book_appointment extends Fragment {
             age.requestFocus();
             return false;
         }
-
         if ("Choose Option".equals(hospital))
         {
             Toast.makeText(getActivity(), "Select a hospital", Toast.LENGTH_LONG).show();
@@ -333,7 +316,6 @@ public class book_appointment extends Fragment {
             date.requestFocus();
             return false;
         }
-
         return true;
     }
 
