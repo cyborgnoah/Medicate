@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,10 +53,11 @@ public class My_Appointment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mdatabase=FirebaseDatabase.getInstance();
-        mReference=mdatabase.getReference();
+        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mdatabase = FirebaseDatabase.getInstance();
+        mReference = mdatabase.getReference();
 
-        listView=(ListView)view.findViewById(R.id.list);
+        listView = (ListView) view.findViewById(R.id.list);
 
         pDialog = new ProgressDialog(getContext());
         pDialog.setCancelable(false);
@@ -62,27 +65,23 @@ public class My_Appointment extends Fragment {
         pDialog.setMessage("Fetching Form...Please Wait");
         showDialog();
 
-        mReference.child("Hospital_Data").addListenerForSingleValueEvent(new ValueEventListener() {
+        mReference.child("users").child(userId).child("Book Appointment").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 final List<String> namesList = new ArrayList<String>();
 
-                for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
-                    Message msg = messageSnapshot.getValue(Message.class);
-                    namesList.add(msg.Hospital_Name);
+                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                     Message msg = messageSnapshot.getValue(Message.class);
+                   if(msg!=null){
+                     namesList.add(msg.Fullname);
+                   }
                 }
 
-                //Spinner areaSpinner = (Spinner) findViewById(R.id.spinner);
-                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, namesList);
-                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), R.layout.activity_listview, R.id.textView,namesList);
                 listView.setAdapter(areasAdapter);
-
-                //
-                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, namesList);
-                listView.setAdapter(adapter);
-
                 hideDialog();
+               // Toast.makeText(getActivity(),"i am out",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -92,9 +91,14 @@ public class My_Appointment extends Fragment {
                 // ...
             }
         });
+    }
 
-
-
+    public static class  Message{
+        String Fullname;
+        Message(){}
+        Message(String Fullname){
+            this.Fullname=Fullname;
+        }
     }
 
     private void showDialog()

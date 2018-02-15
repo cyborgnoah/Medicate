@@ -121,10 +121,8 @@ public class    per_detail_2 extends Fragment {
                 }
                 hideDialog();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 

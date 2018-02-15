@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name"
+        android:layout_alignBottom="@+id/name"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:text="Hospital:" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="18dp"
+        android:layout_toEndOf="@+id/textView15"
+        android:inputType="textPersonName"
+        android:paddingTop="0dp" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView15"
+        android:layout_below="@+id/name"
+        android:text="Date:" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/name"
+        android:layout_below="@+id/textView15"
+        android:inputType="date"
+        android:paddingTop="0dp"/>
+
+    <EditText
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/date"
+        android:layout_below="@+id/textView16"
+        android:inputType="time"
+        android:paddingTop="0dp"/>
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView15"
+        android:layout_below="@+id/date"
+        android:text="Time:" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/approve"
+        android:layout_alignBottom="@+id/approve"
+        android:layout_toStartOf="@+id/approve"
+        android:text="Approved:" />
+
+    <EditText
+        android:id="@+id/approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/time"
+        android:layout_below="@+id/time"
+        android:inputType="textPersonName"
+        android:paddingTop="0dp"
+         />
+</RelativeLayout>

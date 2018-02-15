@@ -49,7 +49,7 @@ public class book_appointment extends Fragment {
     private int pMonth;
     private int pDay;
 
-    private String fullname,gender,Age,hospital,time,apdate;
+    private String fullname,gender,Age,hospital,time,apdate,approved;
 
     public book_appointment() {
         // Required empty public constructor
@@ -166,15 +166,10 @@ public class book_appointment extends Fragment {
                         namesList.add(msg.Hospital_Name);
                     }
 
-                    //Spinner areaSpinner = (Spinner) findViewById(R.id.spinner);
                     ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, namesList);
                     areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spin.setAdapter(areasAdapter);
 
-                    //
-                /*    ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, namesList);
-                    spin.setAdapter(adapter);
-*/
                 hideDialog();
             }
 
@@ -196,10 +191,11 @@ public class book_appointment extends Fragment {
                 gender = gen.getText().toString();
                 Age = age.getText().toString();
                 apdate = date.getText().toString();
+                approved="No";
                 boolean isValidRegistration = validateUser();
                 if (isValidRegistration) {
-                    Message2 appoint1 = new Message2(fullname, gender, Age, hospital, time, apdate);
-                    Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate,userId);
+                    Message2 appoint1 = new Message2(fullname, gender, Age, hospital, time, apdate,approved);
+                    Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate,userId,approved);
                     mReference1.child("users").child(userId).child("Book Appointment").push().setValue(appoint1);
                     mReference2.child("Appointment Requests").child(hospital).push().setValue(appoint2);
 
@@ -235,9 +231,9 @@ public class book_appointment extends Fragment {
     }
 
     public static class  Message2{
-        String Fullname,Gender,Age,Hospital,Time,Date,UserId;
+        String Fullname,Gender,Age,Hospital,Time,Date,UserId,Approved;
         Message2(){}
-        Message2(String Fullname,String Gender,String Age,String Hospital,String Time,String Date){
+        Message2(String Fullname,String Gender,String Age,String Hospital,String Time,String Date,String Approved){
 
             this.Fullname=Fullname;
             this.Gender=Gender;
@@ -245,9 +241,10 @@ public class book_appointment extends Fragment {
             this.Hospital=Hospital;
             this.Time=Time;
             this.Date=Date;
+            this.Approved=Approved;
 
         }
-        Message2(String Fullname,String Gender,String Age,String Hospital,String Time,String Date,String userid){
+        Message2(String Fullname,String Gender,String Age,String Hospital,String Time,String Date,String userid,String Approve){
 
             this.Fullname=Fullname;
             this.Gender=Gender;
@@ -256,6 +253,7 @@ public class book_appointment extends Fragment {
             this.Time=Time;
             this.Date=Date;
             this.UserId=userid;
+            this.Approved=Approve;
 
         }
 
