@@ -174,7 +174,7 @@ public class book_appointment extends Fragment {
                         Message msg = messageSnapshot.getValue(Message.class);
                         namesList.add(msg.Hospital_Name);
                         namesList_email.add(msg.Hospital_Email);
-                        namesList_uid.add(msg.Uid);
+                        namesList_uid.add(msg.Hospital_Uid);
                     }
 
                     ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, namesList);
@@ -223,14 +223,14 @@ public class book_appointment extends Fragment {
     public static class Message{
         public String Hospital_Name;
         public String Hospital_Email;
-        public String Uid;
+        public String Hospital_Uid;
 
         Message(){}
-        Message(String Hospital_Name,String Hospital_Email,String Uid){
+        Message(String Hospital_Name,String Hospital_Email,String Hospital_Uid){
 
             this.Hospital_Name=Hospital_Name;
             this.Hospital_Email=Hospital_Email;
-            this.Uid=Uid;
+            this.Hospital_Uid=Hospital_Uid;
         }
     }
 
