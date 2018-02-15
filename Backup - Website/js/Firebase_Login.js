@@ -1,3 +1,5 @@
+/*var dbRef=firebase.database().ref().child("Hello");
+dbRef.set({name:"name"});*/					//Testing Purpose
 var database = firebase.database().ref('/Hospital_Data/');
 function login()
 {

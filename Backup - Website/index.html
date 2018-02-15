@@ -55,19 +55,12 @@
 				<div id="small-dialog1" class="mfp-hide book-form">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h3>Log In </h3>
-					<form action="#" method="post">
-						<input type="email" name="Email" class="email" placeholder="Hospital Email ID" required="" />
-						<input type="password" name="Password" class="password" placeholder="Password" required="" />
-						<ul>
-							<li>
-								<input type="checkbox" id="brand1" value="">
-								<label for="brand1"><span></span>Remember me</label>
-							</li>
-						</ul>
+
+						<input type="email" name="Email" class="email" placeholder="Hospital Email ID" required="" id="login_email"/>
+						<input type="password" name="Password" class="password" placeholder="Password" required="" id="login_password"/>
 						<a href="#">Forgot Password?</a><br>
 						<div class="clearfix"></div>
-						<input type="submit" value="Sign In">
-					</form>
+						<input type="submit" value="Log In" onclick="login()" id="login">
 					</div>
 				</div>
 			</div>
@@ -80,44 +73,19 @@
 			<div class="modal-content">
 				<div id="small-dialog2" class="mfp-hide book-form">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h3>Sign Up</h3>
-					<form action="#" method="post">
+					<h3>Register Hospital</h3>
 						<input type="text" name="Name" placeholder="Hospital Name" required="" id="Name"/>
 						<input type="email" name="Email" class="email" placeholder="Hospital Email" required="" id="Email"/>
 						<input type="password" name="Password" id="password1" class="password" placeholder="Password" required="" />
 						<input type="password" name="Password" id="password2" class="password" placeholder="Confirm Password" required="" />
-						<input type="submit" value="Sign Up" onclick="signup()">
+						<input type="submit" value="Register" onclick="signup()" id="signup">
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- //popup for sign up form -->
-	<!--Firebase Initializarion starts-->
-	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyB0BwBC6aiv2oB4d-esbkPiRxHvzumFYOY",
-			authDomain: "medicate-c8086.firebaseapp.com",
-			databaseURL: "https://medicate-c8086-ee60d.firebaseio.com",
-			projectId: "medicate-c8086",
-			storageBucket: "medicate-c8086.appspot.com",
-			messagingSenderId: "71702109131"
-		};
-		firebase.initializeApp(config);
-		/*var dbRef=firebase.database().ref().child("Hello");
-		dbRef.set({name:"name"});*/					//Testing Purpose
-		var database = firebase.database().ref().child("Hospital_Data");
-		function signup()
-		{
-			var hospital_name=document.getElementById('Name');
-			var hospital_email=document.getElementById('Email');
-			var password=document.getElementById('password1');
-			database.push().set({Hospital_Name: hospital_name.value,Hospital_Email: hospital_email.value,Hospital_Password: password.value});
-		}
-	</script>
-	<!--Firebase Initialization Ends-->
+
 	<!--banner-section-starts-here-->
 	<section class="banner jarallax">
 		<div class="navigation">
@@ -140,8 +108,6 @@
 								<li class="active"><a data-hover="Home" href="index.html">Home</a></li>
 								<li><a data-hover="appointment" href="#appointment" class="scroll">appointment</a></li>
 								<li><a data-hover="Services" href="#services" class="scroll">Services</a></li>
-								<li><a data-hover="Staff" href="#staff" class="scroll">Staff</a></li>
-								<li><a data-hover="lab" href="#grid-gallery" class="scroll">lab</a></li>
 								<li><a data-hover="Contact" href="#contact" class="scroll">Contact</a></li>
 							</ul>
 						</nav>
@@ -158,30 +124,26 @@
 							<ul class="rslides" id="slider4">
 								<li>
 									<div class="w3ls-text">
-										<h3>welcome to sanatorium</h3>
-										<h3> the right potential</h3>
-										<p>Cras ultrices lorem a hendrerit condim</p>
+										<h3>welcome to Medicate</h3>
+										<p> A complete Healthcare Solution</p>
 									</div>
 								</li>
 								<li>
 									<div class="w3ls-text">
-										<h3>Good hospitality</h3>
-										<h3>super services</h3>
-										<p>Proin convallis leo vitae ligula portti</p>
+										<h3>Book Appointments</h3>
+										<p>Need Medical Assistance. Book an appointment now.</p>
 									</div>
 								</li>
 								<li>
 									<div class="w3ls-text">
-										<h3>healthy environment</h3>
-										<h3>with clean & Green</h3>
-										<p>Cras ultrices lorem a hendrerit condim</p>
+										<h3>Chabots Services</h3>
+										<p>We provide chatbots to enhance our user experience.</p>
 									</div>
 								</li>
 								<li>
 									<div class="w3ls-text">
-										<h3>best treatment and </h3>
-										<h3> good care</h3>
-										<p>Cras ultrices lorem a hendrerit condim</p>
+										<h3>Forget Medicines?</h3>
+										<p>Download Medicate Complete Healthcare Solution</p>
 									</div>
 								</li>
 							</ul>
@@ -324,224 +286,7 @@
 		</div>
 	</div>
 	<!-- //services -->
-	<!--team-section-end-here-->
-	<section class="team" id="staff">
-		<div class="container">
-			<h3>staff </h3>
-			<div class="agile-team-grids">
-				<div class="col-md-3 col-sm-3 col-xs-3 agile-w3ls">
-					<div class="team-grid text-center">
-						<img src="images/t1.jpg" alt="image" class="img-responsive" />
-						<h4>williamson</h4>
-						<h5>director</h5>
-						<div class="social-icons-tm">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 agile-w3ls">
-					<div class="team-grid text-center">
-						<img src="images/t2.jpg" alt="image" class="img-responsive" />
-						<h4>fisher</h4>
-						<h5>Nurse</h5>
-						<div class="social-icons-tm">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 agile-w3ls">
-					<div class="team-grid text-center">
-						<img src="images/t3.jpg" alt="image" class="img-responsive" />
-						<h4>jesse</h4>
-						<h5>co.director</h5>
-						<div class="social-icons-tm">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 agile-w3ls">
-					<div class="team-grid text-center">
-						<img src="images/t4.jpg" alt="image" class="img-responsive" />
-						<h4>riley</h4>
-						<h5>doctor</h5>
-						<div class="social-icons-tm">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 agile-w3ls">
-					<div class="team-grid text-center">
-						<img src="images/t5.jpg" alt="image" class="img-responsive" />
-						<h4>olivia</h4>
-						<h5>nurse</h5>
-						<div class="social-icons-tm">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 agile-w3ls">
-					<div class="team-grid text-center">
-						<img src="images/t6.jpg" alt="image" class="img-responsive" />
-						<h4>patrick</h4>
-						<h5>doctor</h5>
-						<div class="social-icons-tm">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 agile-w3ls">
-					<div class="team-grid text-center">
-						<img src="images/t7.jpg" alt="image" class="img-responsive" />
-						<h4>garrett</h4>
-						<h5>doctor</h5>
-						<div class="social-icons-tm">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3 col-xs-3 agile-w3ls">
-					<div class="team-grid text-center">
-						<img src="images/t8.jpg" alt="image" class="img-responsive" />
-						<h4>alvarez</h4>
-						<h5>nurse</h5>
-						<div class="social-icons-tm">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</section>
-	<!--//team-section-end-here-->
-	<section class="grid-gallery" id="grid-gallery">
-		<div class="container">
-			<h3 class="title text-center">Lab</h3>
-			<section class="grid-wrap">
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l1.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l1.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l2.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l2.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l3.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid project_icon">
-							<img src="images/l3.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l4.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l4.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l5.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid project_icon">
-							<img src="images/l5.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l6.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l6.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l7.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l7.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l8.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l8.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l9.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l9.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l10.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l10.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l11.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l11.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 agileinfo_portfolio_grid">
-					<a href="images/l12.jpg" class="lsb-preview" data-lsb-group="header">
-						<div class="agileits_portfolio_grid">
-							<img src="images/l12.jpg" alt=" " class="img-responsive" />
-						</div>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
 
-			</section>
-			<!-- // grid-wrap -->
-		</div>
-
-	</section>
-	<!-- //laboratory-section -->
 	<!--testimonial-section-starts-here -->
 	<section class="testimonial jarallax">
 		<div class="container">
@@ -648,79 +393,18 @@
 		</div>
 	</section>
 	<!--//contact-section-end-here-->
-	<!--footer-section-end-here-->
-	<section class="footer-top jarallax">
-		<div class="container">
-			<div class="footer-grids">
-				<div class="w3ls-top-ft text-center">
-					<span>get to know</span>
-					<h3>hospitality</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse iaculis quam non lacus accumsan aliquet</p>
-					<div class="srv-w3ls">
-						<a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Read More</a>
-					</div>
-				</div>
-				<div class="w3ls-bt-ft">
-					<div class="navigation-w3ls">
-						<nav class="navbar-btm">
-							<div class="logo">
-								<h3><a class="navber-brand" href="index.html"><i class="fa fa-heartbeat" aria-hidden="true"></i>sanatorium</a></h3>
-							</div>
-							<div class="footer-nav">
-								<ul class="nav1 w3ls-ma">
-									<li class="active"><a data-hover="Home" class="scroll" href="#home">Home</a></li>
-									<li><a data-hover="appointment" href="#appointment" class="scroll">Appointment</a></li>
-									<li><a data-hover="OurStaff" href="#staff" class="scroll">OurStaff</a></li>
-									<li><a data-hover="ourlab" href="#grid-gallery" class="scroll">Our lab</a></li>
-									<li><a data-hover="Contact" href="#contact" class="scroll">Contact</a></li>
-								</ul>
-							</div>
-						</nav>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="footer-bottom">
-					<div class="col-md-6 col-sm-6 col-xs-6 copy-right-grids">
-						<div class="copy-left">
-							<p class="footer-gd">© 2017 Sanatorium. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">W3layouts</a></p>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-6 top-middle">
-						<ul>
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-						</ul>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">sanatorium</h4>
-				</div>
-				<div class="modal-body agileits">
-					<div class="modal-img">
-						<img src="images/md.jpg" alt="image">
-					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer scelerisque orci consectetur sapien feugiat fermentum.
-						Phasellus convallis efficitur arcu, nec convallis odio egestas sit amet. Praesent erat sem, finibus vel ornare efficitur,
-						mattis sed risus. Duis ornare sodales dui finibus molestie.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--//Modal -->
-	<!--//footer-section-end-here-->
 
-
+	<!--Firebase Initializarion starts-->
+	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+	<script src="js/init_Firebase.js"></script>
+	<script src="js/session_index.js"></script>
+	<!--Firebase Initialization Ends-->
+	<!--Firebase SignUp-->
+	<script src="js/Firebase_Signup.js"></script>
+	<!--//Firebase SignUp-->
+	<!--Firebase Login-->
+	<script src="js/Firebase_Login.js"></script>
+	<!--//Firebase Login-->
 	<!-- Default-JavaScript-File -->
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<!-- password-script -->
