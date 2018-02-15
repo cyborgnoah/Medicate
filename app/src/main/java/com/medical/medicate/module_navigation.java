@@ -152,7 +152,7 @@ public class module_navigation extends AppCompatActivity
             getSupportActionBar().setTitle("Book Appointment");
 
         }else if(id==R.id.myappointment){
-
+            fragment = new My_Appointment();
             getSupportActionBar().setTitle("My Appointments");
         }
 
