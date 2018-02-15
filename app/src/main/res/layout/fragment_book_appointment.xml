@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,60 +10,134 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25sp"
+        android:layout_marginRight="25sp">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:text="      Book Appointment      "
-            android:textColor="@color/colorPrimary"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+            android:layout_marginTop="20dp"
+            android:text="Full Name" />
 
         <EditText
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textView2"
-
-            android:layout_alignStart="@+id/textView2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/textView2"
-            android:layout_marginTop="18dp"
-            android:hint="Full Name"
             android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/name"
+            android:layout_marginTop="17dp"
+            android:text="Gender" />
 
         <EditText
             android:id="@+id/gen"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView5"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/name"
-            android:layout_below="@+id/name"
-            android:layout_marginTop="11dp"
-            android:ems="7"
-            android:inputType="textPersonName"
-            android:hint="Gender" />
+            android:layout_above="@+id/gen"
+            android:layout_marginStart="24dp"
+            android:layout_toEndOf="@+id/gen"
+            android:text="Age       " />
 
         <EditText
-            android:id="@+id/editText8"
+            android:id="@+id/age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/name"
-            android:layout_alignTop="@+id/gen"
-            android:ems="8"
-            android:inputType="textPersonName"
-            android:hint="Age" />
+            android:layout_alignStart="@+id/textView6"
+            android:layout_below="@+id/textView6"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/gen"
+            android:layout_marginTop="15dp"
+            android:text="Select Hospital" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/editText8"
-            android:layout_alignStart="@+id/gen"
-            android:layout_below="@+id/gen"
-            android:layout_marginTop="17dp" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spin"
+            android:layout_marginTop="11dp"
+            android:text="Timings" />
+
+        <Spinner
+            android:id="@+id/spin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spin2"
+            android:layout_marginTop="16dp"
+            android:text="Apointment Date" />
+
+        <EditText
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView10"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/date"
+            android:layout_toEndOf="@+id/date"
+            android:src="@android:drawable/ic_menu_my_calendar" />
+
+        <Button
+            android:id="@+id/book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageButton"
+            android:layout_marginTop="49dp"
+            android:text="Book "
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimary"/>
+
     </RelativeLayout>
 </FrameLayout>
