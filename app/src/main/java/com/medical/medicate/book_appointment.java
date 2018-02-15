@@ -91,6 +91,8 @@ public class book_appointment extends Fragment {
         pMonth = cal.get(Calendar.MONTH);
         pDay = cal.get(Calendar.DAY_OF_MONTH);
 
+        //final String hosId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
 
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -196,6 +198,7 @@ public class book_appointment extends Fragment {
                 if (isValidRegistration) {
                     Message2 appoint1 = new Message2(fullname, gender, Age, hospital, time, apdate,approved);
                     Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate,userId,approved);
+
                     mReference1.child("users").child(userId).child("Book Appointment").push().setValue(appoint1);
                     mReference2.child("Appointment Requests").child(hospital).push().setValue(appoint2);
 
