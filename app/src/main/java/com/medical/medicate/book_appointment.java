@@ -26,7 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 /**
@@ -37,7 +39,7 @@ public class book_appointment extends Fragment {
     public int n=10,i=1;
     private FirebaseDatabase mdatabase2,mdatabase1;
     private DatabaseReference mReference2,mReference1;
-    private String namesList[] =new String[7];
+    private String namesList[]={"Choose Option"};
     private String timing[]={"Choose Option","Morning Shift(9:30AM - 12:30PM)","Evening Shift(4:30PM - 8:00PM)"};
     private ProgressDialog pDialog;
     private ImageButton imageButton;
@@ -66,7 +68,6 @@ public class book_appointment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        namesList[0] = "Choose Option";
         pDialog = new ProgressDialog(getContext());
         pDialog.setCancelable(false);
         imageButton = (ImageButton) view.findViewById(R.id.imageButton);
@@ -90,6 +91,8 @@ public class book_appointment extends Fragment {
         pYear = cal.get(Calendar.YEAR);
         pMonth = cal.get(Calendar.MONTH);
         pDay = cal.get(Calendar.DAY_OF_MONTH);
+
+
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,14 +156,23 @@ public class book_appointment extends Fragment {
         mReference2.child("Hospital_Data").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
-                    Message msg = messageSnapshot.getValue(Message.class);
-                    Log.d("Name", msg.Hospital_Name);
-                    namesList[i] = msg.Hospital_Name;
-                    i++;
-                }
-                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, namesList);
-                spin.setAdapter(adapter);
+
+                    final List<String> namesList = new ArrayList<String>();
+
+                    for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
+                        Message msg = messageSnapshot.getValue(Message.class);
+                        namesList.add(msg.Hospital_Name);
+                    }
+
+                    //Spinner areaSpinner = (Spinner) findViewById(R.id.spinner);
+                    ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, namesList);
+                    areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spin.setAdapter(areasAdapter);
+
+                    //
+                    ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, namesList);
+                    spin.setAdapter(adapter);
+
                 hideDialog();
             }
 

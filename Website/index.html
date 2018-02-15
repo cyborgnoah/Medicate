@@ -56,8 +56,8 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h3>Log In </h3>
 					<form action="#" method="post">
-						<input type="email" name="Email" class="email" placeholder="Hospital Email ID" required="" />
-						<input type="password" name="Password" class="password" placeholder="Password" required="" />
+						<input type="email" name="Email" class="email" placeholder="Hospital Email ID" required="" id="login_email"/>
+						<input type="password" name="Password" class="password" placeholder="Password" required="" id="login_password"/>
 						<ul>
 							<li>
 								<input type="checkbox" id="brand1" value="">
@@ -66,7 +66,7 @@
 						</ul>
 						<a href="#">Forgot Password?</a><br>
 						<div class="clearfix"></div>
-						<input type="submit" value="Log In">
+						<input type="submit" value="Log In" onclick="login()">
 					</form>
 					</div>
 				</div>
@@ -93,31 +93,7 @@
 		</div>
 	</div>
 	<!-- //popup for sign up form -->
-	<!--Firebase Initializarion starts-->
-	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyB0BwBC6aiv2oB4d-esbkPiRxHvzumFYOY",
-			authDomain: "medicate-c8086.firebaseapp.com",
-			databaseURL: "https://medicate-c8086-ee60d.firebaseio.com",
-			projectId: "medicate-c8086",
-			storageBucket: "medicate-c8086.appspot.com",
-			messagingSenderId: "71702109131"
-		};
-		firebase.initializeApp(config);
-		/*var dbRef=firebase.database().ref().child("Hello");
-		dbRef.set({name:"name"});*/					//Testing Purpose
-		var database = firebase.database().ref().child("Hospital_Data");
-		function signup()
-		{
-			var hospital_name=document.getElementById('Name');
-			var hospital_email=document.getElementById('Email');
-			var password=document.getElementById('password1');
-			database.push().set({Hospital_Name: hospital_name.value,Hospital_Email: hospital_email.value,Hospital_Password: password.value});
-		}
-	</script>
-	<!--Firebase Initialization Ends-->
+
 	<!--banner-section-starts-here-->
 	<section class="banner jarallax">
 		<div class="navigation">
@@ -174,7 +150,7 @@
 								</li>
 								<li>
 									<div class="w3ls-text">
-										<h3>Forget Medicines?</h3>										
+										<h3>Forget Medicines?</h3>
 										<p>Download Medicate Complete Healthcare Solution</p>
 									</div>
 								</li>
@@ -426,7 +402,13 @@
 	</section>
 	<!--//contact-section-end-here-->
 
-
+	<!--Firebase Initializarion starts-->
+	<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+	<script src="js/Firebase_Signup.js"></script>
+	<!--Firebase Initialization Ends-->
+	<!--Firebase Login-->
+	<script src="js/Firebase_Login.js"></script>
+	<!--//Firebase Login-->
 	<!-- Default-JavaScript-File -->
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 	<!-- password-script -->
