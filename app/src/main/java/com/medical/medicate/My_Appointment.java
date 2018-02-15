@@ -1,6 +1,7 @@
 package com.medical.medicate;
 
 
+import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,13 +22,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class My_Appointment extends Fragment {
+public class My_Appointment extends Fragment{
 
 
     private FirebaseDatabase mdatabase;
@@ -50,6 +52,11 @@ public class My_Appointment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -59,7 +66,7 @@ public class My_Appointment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.list);
 
-        pDialog = new ProgressDialog(getContext());
+        pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
 
         pDialog.setMessage("Fetching Form...Please Wait");
@@ -70,11 +77,18 @@ public class My_Appointment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 final List<String> namesList = new ArrayList<String>();
+                final List<String> datelist = new ArrayList<String>();
+                final List<String> timelist = new ArrayList<String>();
+                final List<String> approvelist = new ArrayList<String>();
+
 
                 for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
                      Message msg = messageSnapshot.getValue(Message.class);
                    if(msg!=null){
                      namesList.add(msg.Fullname);
+                     datelist.add(msg.Date);
+                     timelist.add(msg.Time);
+                     approvelist.add(msg.Approved);
                    }
                 }
 
@@ -91,13 +105,18 @@ public class My_Appointment extends Fragment {
                 // ...
             }
         });
+
+
     }
 
     public static class  Message{
-        String Fullname;
+        String Fullname,Date,Time,Approved;
         Message(){}
-        Message(String Fullname){
+        Message(String Fullname,String Date,String Time,String Approved ){
             this.Fullname=Fullname;
+            this.Date=Date;
+            this.Time=Time;
+            this.Approved=Approved;
         }
     }
 
