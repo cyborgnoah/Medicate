@@ -1,7 +1,7 @@
 firebase.auth().onAuthStateChanged(firebaseUser =>{
   if(firebaseUser)
   {
-    var database = firebase.database("https://medicate-c8086-ee60d.firebaseio.com").ref().child("Appointment Requests").child(firebaseUser.uid);
+    var database = firebase.database().ref().child("Appointment Requests").child(firebaseUser.uid);
     database.once('value', function(snapshot)
     {
       snapshot.forEach(function(childSnapshot) {
