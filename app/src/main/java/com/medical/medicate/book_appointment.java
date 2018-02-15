@@ -282,7 +282,7 @@ public class book_appointment extends Fragment {
             gen.requestFocus();
             return false;
         }
-        if (!"male".equals(gender) && !"female".equals(gender))
+        if (!"Male".equals(gender) && !"Female".equals(gender))
         {
             gen.setError("Enter correct gender");
             gen.setText("");
