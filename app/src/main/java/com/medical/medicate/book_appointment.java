@@ -116,7 +116,9 @@ public class book_appointment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 hospital = adapterView.getItemAtPosition(i).toString();
                 hospital_email=namesList_email.get(i).toString();
+                Log.d("Email",hospital_email);
                 hospital_uid=namesList_uid.get(i).toString();
+                Log.d("Email",hospital_uid);
 
             }
 
@@ -172,6 +174,7 @@ public class book_appointment extends Fragment {
                         Message msg = messageSnapshot.getValue(Message.class);
                         namesList.add(msg.Hospital_Name);
                         namesList_email.add(msg.Hospital_Email);
+                        namesList_uid.add(msg.Uid);
                     }
 
                     ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, namesList);
@@ -220,14 +223,14 @@ public class book_appointment extends Fragment {
     public static class Message{
         public String Hospital_Name;
         public String Hospital_Email;
-        public String Hospital_uid;
+        public String Uid;
 
         Message(){}
-        Message(String Hospital_Name,String Hospital_Email,String Hospital_uid){
+        Message(String Hospital_Name,String Hospital_Email,String Uid){
 
             this.Hospital_Name=Hospital_Name;
             this.Hospital_Email=Hospital_Email;
-            this.Hospital_uid=Hospital_uid;
+            this.Uid=Uid;
         }
     }
 

@@ -13,10 +13,10 @@ function signup()
   firebase.auth().onAuthStateChanged(firebaseUser =>{
     if(firebaseUser)
     {
-      database.push().set({Hospital_Name: hospital_name,Hospital_Email: hospital_email,Uid:firebaseUser.uid});
+      database.push().set({Hospital_Name: hospital_name,Hospital_Email: hospital_email,hospital_uid:firebaseUser.uid});
     }
     else
-    {    
+    {
     }
   });
 
