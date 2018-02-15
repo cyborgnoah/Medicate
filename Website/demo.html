@@ -21,6 +21,63 @@
 	<!-- mystyle.css-file -->
 	<link href="css/mystyle.css" rel='stylesheet' type='text/css' />
 	<!-- //mystyle.css-file -->
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<style>
+  body
+  {
+    margin:0px;
+  }
+  .custom_left
+  {
+    width: 40%;
+    height:100%;
+    float:left;
+		background-color: #D3D3D3;
+
+  }
+  .custom_mid
+  {
+    width: 40%;
+    height:18%;
+    float:left;
+		background-color: #D3D3D3;
+  }
+  .custom_right
+  {
+    width: 20%;
+    height:18%;
+    float:left;
+		background-color: #D3D3D3;
+  }
+  .custom_button_accept
+  {
+    margin: 5px;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+  }
+  .custom_button_accept:hover
+  {
+    background-color: #46a049;
+  }
+  .custom_button_decline
+  {
+    margin: 5px;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #f44336;;
+  }
+  .custom_button_decline:hover
+  {
+    background-color: #da190b;;
+  }
+  </style>
 </head>
 <!-- Head -->
 
@@ -42,30 +99,44 @@
 	<!--//header-section-end-here-->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div id="parent"></div>
 
   <!--Firebase Initializarion starts-->
   <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
   <script src="js/init_Firebase.js"></script>
   <script src="js/session.js"></script>
     <!--Firebase Initialization Ends-->
+		<script type="text/javascript">
+		function button_accept(uid_hospital,userid,uid_user_appointment)
+		{
+			alert(uid_hospital+" => "+userid+" => "+uid_user_appointment);
+
+			firebase.auth().onAuthStateChanged(firebaseUser =>{
+			  if(firebaseUser)
+			  {
+					//firebase.database().ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Approved");
+					//firebase.database("https://medicate-c8086-ee60d.firebaseio.com").ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("Approved");
+			  }
+			});
+
+		}
+		function button_decline(uid_hospital,userid,uid_user_appointment)
+		{
+			alert(uid_hospital+" => "+userid+" => "+uid_user_appointment);
+
+			firebase.auth().onAuthStateChanged(firebaseUser =>{
+			  if(firebaseUser)
+			  {
+					//firebase.database().ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Declined");
+					//firebase.database("https://medicate-c8086-ee60d.firebaseio.com").ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("Declined");
+			  }
+			});
+
+		}
+		</script>
     <script src="js/data_appointment.js"></script>
   <script type="text/javascript" src="js/logout.js"></script>
-  <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
   <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 </body>
 </html>

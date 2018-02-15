@@ -1,4 +1,3 @@
-var database = firebase.database().ref('/Hospital_Data/');
 function login()
 {
   if(validate_login())

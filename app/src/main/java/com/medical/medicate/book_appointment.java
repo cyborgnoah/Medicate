@@ -194,10 +194,10 @@ public class book_appointment extends Fragment {
                 approved="No";
                 boolean isValidRegistration = validateUser();
                 if (isValidRegistration) {
-                    Message2 appoint1 = new Message2(fullname, gender, Age, hospital, time, apdate, approved);
-                    Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate, userId, approved);
-
+                    Message2 appoint1 = new Message2(fullname, gender, Age, hospital, time, apdate, approved );
+                    String TID = mReference1.child("users").child(userId).child("Book Appointment").push().getKey();
                     mReference1.child("users").child(userId).child("Book Appointment").push().setValue(appoint1);
+                    Message2 appoint2 = new Message2(fullname, gender, Age, hospital, time, apdate, userId, approved,TID);
                     mReference2.child("Appointment Requests").child(hospital_uid).push().setValue(appoint2);
 
                     Toast.makeText(getActivity(), "Appointment request generated ", Toast.LENGTH_SHORT).show();
@@ -235,7 +235,7 @@ public class book_appointment extends Fragment {
     }
 
     public static class  Message2{
-        String Fullname,Gender,Age,Hospital,Time,Date,UserId,Approved;
+        String Fullname,Gender,Age,Hospital,Time,Date,UserId,Approved,Tid;
         Message2(){}
         Message2(String Fullname,String Gender,String Age,String Hospital,String Time,String Date,String Approved){
 
@@ -247,7 +247,7 @@ public class book_appointment extends Fragment {
             this.Date=Date;
             this.Approved=Approved;
         }
-        Message2(String Fullname,String Gender,String Age,String Hospital,String Time,String Date,String userid,String Approve){
+        Message2(String Fullname,String Gender,String Age,String Hospital,String Time,String Date,String userid,String Approve,String Tid){
 
             this.Fullname=Fullname;
             this.Gender=Gender;
@@ -257,6 +257,7 @@ public class book_appointment extends Fragment {
             this.Date=Date;
             this.UserId=userid;
             this.Approved=Approve;
+            this.Tid=Tid;
         }
     }
 
