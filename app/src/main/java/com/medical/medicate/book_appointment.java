@@ -85,7 +85,7 @@ public class book_appointment extends Fragment {
         mdatabase1 = FirebaseDatabase.getInstance();
         mReference1 = mdatabase1.getReference();
 
-        mdatabase2 = FirebaseDatabase.getInstance("https://medicate-c8086-ee60d.firebaseio.com");
+        mdatabase2 = FirebaseDatabase.getInstance();
         mReference2 = mdatabase2.getReference();
 
         final Calendar cal = Calendar.getInstance();
