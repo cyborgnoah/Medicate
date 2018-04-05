@@ -113,8 +113,7 @@
 			  if(firebaseUser)
 			  {
 					//firebase.database("https://medicate-c8086.firebaseio.com").ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Approved");
-					var sec_db=app.database("https://medicate-c8086.firebaseio.com");
-					sec_db.ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Yes");
+					firebase.database().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Yes");
 					firebase.database().ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("Yes");
 			  }
 			});
@@ -124,9 +123,8 @@
 		{
 			firebase.auth().onAuthStateChanged(firebaseUser =>{
 			  if(firebaseUser)
-			  {
-					var sec_db=app.database("https://medicate-c8086.firebaseio.com");
-					sec_db.ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("No");
+			  {					
+					firebase.database().ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("No");
 					firebase.database().ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("No");
 			  }
 			});
