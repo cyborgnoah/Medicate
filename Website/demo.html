@@ -109,9 +109,11 @@
 		<script type="text/javascript">
 		function button_accept(uid_hospital,userid,uid_user_appointment)
 		{
+			alert("Request Approved 1");
 			firebase.auth().onAuthStateChanged(firebaseUser =>{
 			  if(firebaseUser)
 			  {
+					alert("Request Approved 2");
 					//firebase.database("https://medicate-c8086.firebaseio.com").ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Approved");
 					firebase.database().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Yes");
 					firebase.database().ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("Yes");
@@ -121,9 +123,11 @@
 		}
 		function button_decline(uid_hospital,userid,uid_user_appointment)
 		{
+			alert("Request Declined 1");
 			firebase.auth().onAuthStateChanged(firebaseUser =>{
 			  if(firebaseUser)
-			  {					
+			  {
+					alert("Request Declined 2");
 					firebase.database().ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("No");
 					firebase.database().ref().child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("No");
 			  }
