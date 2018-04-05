@@ -110,11 +110,9 @@
 		var database_edit = firebase.database().ref();
 		function button_accept(uid_hospital,userid,uid_user_appointment)
 		{
-			alert("Request Approved 1");
 			firebase.auth().onAuthStateChanged(firebaseUser =>{
 			  if(firebaseUser)
 			  {
-					alert("Request Approved 2");
 					//firebase.database("https://medicate-c8086.firebaseio.com").ref().child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Approved");
 					database_edit.child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("Yes");
 					database_edit.child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("Yes");
@@ -123,12 +121,10 @@
 
 		}
 		function button_decline(uid_hospital,userid,uid_user_appointment)
-		{
-			alert("Request Declined 1");
+		{			
 			firebase.auth().onAuthStateChanged(firebaseUser =>{
 			  if(firebaseUser)
 			  {
-					alert("Request Declined 2");
 					database_edit.child("users").child(userid).child("Book Appointment").child(uid_user_appointment).child("Approved").set("No");
 					database_edit.child("Appointment Requests").child(firebaseUser.uid).child(uid_hospital).child("Approved").set("No");
 			  }
