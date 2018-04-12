@@ -8,12 +8,12 @@
             android:title="Home" />
         <item
             android:id="@+id/appointment"
-            android:icon="@drawable/personal"
+            android:icon="@drawable/appoint"
             android:title="Book Appointment" />
 
         <item
             android:id="@+id/myappointment"
-            android:icon="@drawable/personal"
+            android:icon="@drawable/hel"
             android:title="My Appointment" />
         <item
             android:id="@+id/sos"
@@ -21,7 +21,7 @@
             android:icon="@drawable/sos"/>
         <item
             android:id="@+id/other"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/chatbot"
             android:title="AI Doctor" />
     </group>
 
@@ -42,7 +42,7 @@
         <menu>
             <item android:title="Help"
                 android:id="@+id/help"
-                android:icon="@drawable/personal"/>
+                android:icon="@drawable/helpp"/>
 
 
             <item

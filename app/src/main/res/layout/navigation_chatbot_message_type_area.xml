@@ -19,6 +19,17 @@
         android:hint="Write a message" />
 
     <ImageView
+        android:id="@+id/chatbot_send_audio"
+        android:background="@drawable/image_message_area"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:padding="4dp"
+        android:src="@android:drawable/ic_menu_send" />
+
+    <ImageView
         android:id="@+id/chatbot_send"
         android:background="@drawable/image_message_area"
         android:layout_marginLeft="5sp"
